@@ -3,6 +3,7 @@ package ir.madamas.kntushahed.kntushahed.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,11 @@ public class notificationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View notificationFragmentView =  inflater.inflate(R.layout.fragment_notification, container, false);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        return notificationFragmentView;
     }
 
 }
