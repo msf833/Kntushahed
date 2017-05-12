@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment;
+import ir.madamas.kntushahed.kntushahed.fragments.notificationFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,13 +45,15 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_dashboard);
+                   /// mTextMessage.setText(R.string.title_dashboard);
 
                     FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
                     frm.commit();
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                  //  mTextMessage.setText(R.string.title_notifications);
+                    FragmentTransaction frm1 = fragmentManager.beginTransaction().replace(R.id.content,new notificationFragment());
+                    frm1.commit();
                     return true;
             }
             return false;
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         myrequestqueue = Volley.newRequestQueue(this);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+      //  mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
