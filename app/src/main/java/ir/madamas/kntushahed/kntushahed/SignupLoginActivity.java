@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -43,38 +44,34 @@ public class SignupLoginActivity extends AppCompatActivity {
     // UI references.
     private EditText username_signup;
     private EditText Password_signup;
-    private View mProgressView;
-    private View mLoginFormView;
+    private EditText name_signup;
+    private EditText family_signup;
+    private EditText username_login;
+    private EditText Password_login;
+    private EditText stdID_signup;
+    private ProgressBar ProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_login);
 
+        //progressBar
+        ProgressView = (ProgressBar) findViewById(R.id.login_progress);
+
         // Set up the login form.
         username_signup = (EditText) findViewById(R.id.Tbox_username_signup);
         Password_signup = (EditText) findViewById(R.id.TBox_password_signup);
+        username_login = (EditText) findViewById(R.id.TBox_username_login);
+        Password_login = (EditText) findViewById(R.id.TBox_password_login);
+        name_signup = (EditText) findViewById(R.id.TBox_name_signup);
+        family_signup = (EditText) findViewById(R.id.TBox_family_signup);
+        stdID_signup = (EditText) findViewById(R.id.TBox_stdID_signup);
 
-        Password_signup.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.signun_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        Button signun_button = (Button) findViewById(R.id.signun_button);
+        Button login_button = (Button) findViewById(R.id.login_button);
 
         //mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
 
         TabHost host = (TabHost)findViewById(R.id.tabHost);
         host.setup();
@@ -91,6 +88,36 @@ public class SignupLoginActivity extends AppCompatActivity {
         spec.setIndicator("ورود");
         host.addTab(spec);
 
+        signun_button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Txt_username_signup = username_signup.getText().toString();
+                String Txt_Password_signup = Password_signup.getText().toString();
+                String Txt_name_signup = name_signup.getText().toString();
+                String Txt_family_signup = family_signup.getText().toString();
+                String Txt_stdID_signup = stdID_signup.getText().toString();
+
+                if (isUsernameValid(Txt_username_signup) == true &&
+                        isPasswordValid(Txt_Password_signup) == true &&
+                        isNameFamilyValid(Txt_name_signup) == true &&
+                        isNameFamilyValid(Txt_family_signup) == true &&
+                        isStdIDValid(Txt_stdID_signup) == true) {
+
+
+
+                }
+
+            }
+        });
+
+        login_button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Txt_username_login = username_login.getText().toString();
+                String Txt_Password_login = Password_login.getText().toString();
+            }
+        });
+
     }
 
 
@@ -102,13 +129,35 @@ public class SignupLoginActivity extends AppCompatActivity {
 
 
     private boolean isUsernameValid(String phoneNum) {
-        //TODO: Replace this with your own logic
-        return phoneNum.startsWith("9");
+        if (phoneNum.startsWith("9")){
+
+            return true;
+        }
+        return false;
     }
 
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+    private boolean isPasswordValid(String name) {
+        if (name.length() > 4){
+
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isNameFamilyValid(String family) {
+        if (family.length() > 2){
+
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isStdIDValid(String stdID) {
+        /*if (stdID.length() > 2){
+
+            return true;
+        }*/
+        return false;
     }
 
 }

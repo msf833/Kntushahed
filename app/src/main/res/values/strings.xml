@@ -17,6 +17,7 @@
     <string name="action_login">ورود</string>
     <string name="action_name_signup">نام</string>
     <string name="action_family_signup">نام خانوادگی</string>
+    <string name="action_stdID_signup">شماره دانشجویی</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_phone">شماره تلفن باید با 9 آغاز شود</string>
     <string name="error_invalid_password">This password is too short</string>
