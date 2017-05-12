@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.navigation_home:
                    /// mTextMessage.setText(R.string.title_dashboard);
-
                     FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
                     frm.commit();
                     return true;
+
                 case R.id.navigation_notifications:
                   //  mTextMessage.setText(R.string.title_notifications);
                     FragmentTransaction frm1 = fragmentManager.beginTransaction().replace(R.id.content,new notificationFragment());
