@@ -4,6 +4,8 @@ import android.app.DownloadManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,6 +26,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     RequestQueue myrequestqueue;
     String tempMF;
 
-JSONObject jobg = new  JSONObject();
+    FragmentManager fragmentManager = getSupportFragmentManager();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -43,6 +47,9 @@ JSONObject jobg = new  JSONObject();
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
+
+                    FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
+                    frm.commit();
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
@@ -62,44 +69,8 @@ JSONObject jobg = new  JSONObject();
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        Button btn_getData = (Button) findViewById(R.id.btn_getData);
-        btn_getData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("MSF","btn request clicked");
-             JsonObjectRequest JsonRequest = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/SelectValue_profList.php",jobg,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
 
-                                try {
-                                    JSONArray array = response.getJSONArray("prof_list");
-                                    Toast.makeText(MainActivity.this, "on responsed", Toast.LENGTH_SHORT).show();
-                                    for (int i =0 ; i < array.length();i++){
-                                        JSONObject temp = array.getJSONObject(i);
 
-                                         tempMF  = temp.getString("ProfessorsID");
-                                    }
-
-                                    Log.i("resp",tempMF);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
-                        }
-
-                );
-                myrequestqueue.add(JsonRequest);
-            }
-        });
     }
 
 }
