@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     RequestQueue myrequestqueue;
     String tempMF;
 
-    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentManager fragmentManager ;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myrequestqueue = Volley.newRequestQueue(this);
+        myrequestqueue = Volley.newRequestQueue(getApplicationContext());
+         fragmentManager = getSupportFragmentManager();
         FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
         frm.commit();
 

@@ -4,11 +4,29 @@
     android:layout_height="match_parent"
     tools:context="ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment">
 
+
+    <ListView
+        android:id="@+id/listView_fragment_courseList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+
+    <GridView
+        android:id="@+id/gridView_fragment"
+        android:numColumns="auto_fit"
+        android:gravity="center"
+        android:columnWidth="70dp"
+        android:stretchMode="columnWidth"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
     <Button
         android:id="@+id/btn_getData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:text="Get Data" />
+        android:text="Get Data"
+        android:visibility="gone" />
 
 </FrameLayout>
