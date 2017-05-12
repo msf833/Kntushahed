@@ -23,8 +23,11 @@ public class coursesListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View courseListFragmentView =  inflater.inflate(R.layout.fragment_courses_list, container, false);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_courses_list, container, false);
+        return courseListFragmentView;
     }
 
 }

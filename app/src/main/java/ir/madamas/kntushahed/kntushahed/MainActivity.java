@@ -26,7 +26,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
+    //private TextView mTextMessage;
 
     RequestQueue myrequestqueue;
     String tempMF;
@@ -39,7 +39,7 @@ JSONObject jobg = new  JSONObject();
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    //mTextMessage.setText(R.string.title_home);
                     return true;
                 /*
                 case R.id.navigation_dashboard:
@@ -47,7 +47,7 @@ JSONObject jobg = new  JSONObject();
                 return true;
                 */
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    //mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
             return false;
@@ -61,7 +61,7 @@ JSONObject jobg = new  JSONObject();
         setContentView(R.layout.activity_main);
         myrequestqueue = Volley.newRequestQueue(this);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        //mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         Button btn_getData = (Button) findViewById(R.id.btn_getData);
