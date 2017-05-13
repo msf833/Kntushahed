@@ -14,6 +14,8 @@
     <string name="prompt_username">نام کاربری(شماره موبایل شما) مثل: 9120000000</string>
     <string name="prompt_password">پسورد</string>
     <string name="action_sign_in">ثبت نام</string>
+    <string name="action_confirmEdit">ثبت تغییرات</string>
+    <string name="action_cancel">لغو</string>
     <string name="action_login">ورود</string>
     <string name="action_name_signup">نام</string>
     <string name="action_family_signup">نام خانوادگی</string>

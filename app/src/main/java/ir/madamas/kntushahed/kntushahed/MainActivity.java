@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -89,11 +90,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        boolean Registered = sharedPreferences.getBoolean("Registered", false);
+//        boolean Registered = sharedPreferences.getBoolean("Registered", false);
+//
+//        if (Registered == false){
+//            Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
+//            startActivityForResult(item_intent, 1);
+//        }
+    }
 
-        if (Registered == false){
-            Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
-            startActivityForResult(item_intent, 1);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.add){
+            Intent intent = new Intent(getApplicationContext(), EditPersonalInfo.class);
+            startActivity(intent);
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 }
