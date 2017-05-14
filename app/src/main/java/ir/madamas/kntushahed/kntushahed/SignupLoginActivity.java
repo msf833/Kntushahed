@@ -150,6 +150,13 @@ public class SignupLoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String Txt_username_login = username_login.getText().toString();
                 String Txt_Password_login = Password_login.getText().toString();
+
+                if (isUsernameValid(Txt_username_login) == true &&
+                        isPasswordValid(Txt_Password_login) == true) {
+
+                    loginUser(Txt_username_login, Txt_Password_login);
+
+                }
             }
         });
 
@@ -228,6 +235,77 @@ public class SignupLoginActivity extends AppCompatActivity {
 
     }
 
+    private void loginUser(final String u, final String p) {
+
+        myrequestqueue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject student = new JSONObject();
+        try {
+            student.put("phoneNum", u);
+            student.put("password", p);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jobrq = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/SelectValue_LoginActivity.php", student,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        String n = "";
+                        String f = "";
+                        String s = "";
+                        try {
+
+                            JSONArray array = response.getJSONArray("search_resualt");
+
+                            JSONObject jsontemp = array.getJSONObject(0);
+
+                            flag = jsontemp.getString("flag");
+                            userID = jsontemp.getString("studentID");
+                            n = jsontemp.getString("name");
+                            f = jsontemp.getString("family");
+                            s = jsontemp.getString("stdID");
+
+                            if (flag.toString().startsWith("d")){
+                                flagTemp = true;
+                            }
+
+                            if(flagTemp){
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean("Registered", true);
+                                editor.putString("Username", u);
+                                editor.putString("Password", p);
+                                editor.putString("name", n);
+                                editor.putString("family", f);
+                                editor.putString("stdID", s);
+                                editor.putString("userID", userID);
+                                editor.apply();
+                                finish();
+                            }else {
+                                Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+
+
+        );
+        myrequestqueue.add(jobrq);
+
+    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.
