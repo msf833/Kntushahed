@@ -5,5 +5,5 @@ package ir.madamas.kntushahed.kntushahed.Statics;
  */
 
 public class attributes {
-   public static int version = 1;
+   public static int version = 2;
 }

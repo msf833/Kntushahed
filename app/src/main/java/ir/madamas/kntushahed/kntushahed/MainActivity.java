@@ -3,6 +3,7 @@ package ir.madamas.kntushahed.kntushahed;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ir.madamas.kntushahed.kntushahed.Statics.attributes;
 import ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment;
 import ir.madamas.kntushahed.kntushahed.fragments.notificationFragment;
 
@@ -90,8 +92,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        boolean Registered = sharedPreferences.getBoolean("Registered", false);
-//
+        boolean Registered = sharedPreferences.getBoolean("Registered", false);
+
+        Thread th = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                checkupdate();
+            }
+        });
+        th.run();
 //        if (Registered == false){
 //            Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
 //            startActivityForResult(item_intent, 1);
@@ -116,5 +125,35 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+    void checkupdate(){
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+      final   String DownloadupdateLink = "http://api.mim-app.ir/kntuShahedApp/app.apk";
+        StringRequest sr = new StringRequest(Request.Method.POST, "http://api.mim-app.ir/app_update.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                int serverversion  = Integer.parseInt(response);
+                if (attributes.version < serverversion){
+                    Toast.makeText(getApplicationContext(), "بروز رسانی نرم افزار", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"from servr rercived : "+ response.toString(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Intent.ACTION_VIEW , Uri.parse(DownloadupdateLink));
+                    startActivity(intent);
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "failed to  check update", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        queue.add(sr);
+
+
     }
 }
