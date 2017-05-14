@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (Registered == false){
             Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
-            startActivityForResult(item_intent, 1);
+            startActivity(item_intent);
         }
     }
 
@@ -167,5 +167,7 @@ public class MainActivity extends AppCompatActivity {
             eCounter ++;
             Toast.makeText(getApplicationContext(), "برای خارج شدن از برنامه مجددا کلیک کنید", Toast.LENGTH_SHORT).show();
         }
+
     }
+
 }

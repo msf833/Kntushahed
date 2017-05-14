@@ -137,14 +137,7 @@ public class SignupLoginActivity extends AppCompatActivity {
                         isNameFamilyValid(Txt_family_signup) == true &&
                         isStdIDValid(Txt_stdID_signup) == true) {
 
-                        if (registerUser(Txt_username_signup, Txt_Password_signup, Txt_name_signup, Txt_family_signup)){
-                            Toast.makeText(getApplicationContext(), "yaaaaaaaaaaaaaaaaaaay *_*", Toast.LENGTH_SHORT).show();
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean("Registered", true);
-                            finishActivity(1);
-                        }else {
-                            Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
-                        }
+                        registerUser(Txt_username_signup, Txt_Password_signup, Txt_name_signup, Txt_family_signup, Txt_stdID_signup);
 
                 }
 
@@ -161,9 +154,10 @@ public class SignupLoginActivity extends AppCompatActivity {
 
     }
 
-    private boolean registerUser(String u, String p, String n, final String f) {
+    boolean flagTemp = false;
 
-        Toast.makeText(getApplicationContext(), "Sending data...", Toast.LENGTH_SHORT).show();
+    private void registerUser(final String u, final String p, final String n, final String f, final String s) {
+
         myrequestqueue = Volley.newRequestQueue(getApplicationContext());
 
         JSONObject student = new JSONObject();
@@ -172,14 +166,13 @@ public class SignupLoginActivity extends AppCompatActivity {
             student.put("password", p);
             student.put("name", n);
             student.put("family", f);
+            student.put("stdID", s);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
-        //http://api.mim-app.ir/SelectValue_coursesList.php
-        JsonObjectRequest jobrq = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/SelectValue_coursesList.php", student,
+        JsonObjectRequest jobrq = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/InsertValue_SignupActivity.php", student,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -188,13 +181,30 @@ public class SignupLoginActivity extends AppCompatActivity {
 
                             JSONArray array = response.getJSONArray("search_resualt");
 
-                                JSONObject jsontemp = array.getJSONObject(0);
+                            JSONObject jsontemp = array.getJSONObject(0);
 
-                            Toast.makeText(getApplicationContext(), "ans: ^_^", Toast.LENGTH_SHORT).show();
+                            flag = jsontemp.getString("flag");
 
-                                //flag = jsontemp.getString("flag");
-                                //Log.i("log"," flag : "+jsontemp.getString("flag"));
-                                Toast.makeText(getApplicationContext(), "ans:" + jsontemp.toString() + " ^_^", Toast.LENGTH_SHORT).show();
+                            if (flag.toString().startsWith("d")){
+                                flagTemp = true;
+
+                            }
+
+                            if(flagTemp){
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean("Registered", true);
+                                editor.putString("Username", u);
+                                editor.putString("Password", p);
+                                editor.putString("name", n);
+                                editor.putString("family", f);
+                                editor.putString("stdID", s);
+                                editor.apply();
+                                editor.apply();
+                                finish();
+                            }else {
+                                Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
+                            }
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -214,11 +224,6 @@ public class SignupLoginActivity extends AppCompatActivity {
         );
         myrequestqueue.add(jobrq);
 
-//        if (flag.equals("true")){
-//            return true;
-//        }
-
-        return false;
     }
 
 
@@ -254,10 +259,9 @@ public class SignupLoginActivity extends AppCompatActivity {
     }
 
     private boolean isStdIDValid(String stdID) {
-        /*if (stdID.length() > 2){
-
+        if (stdID.length() < 15 && stdID.length() >= 7){
             return true;
-        }*/
+        }
         return true;
     }
 
