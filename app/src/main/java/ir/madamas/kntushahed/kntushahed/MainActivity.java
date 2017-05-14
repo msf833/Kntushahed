@@ -38,6 +38,7 @@ import static java.security.AccessController.getContext;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    int eCounter = 0;
 
     RequestQueue myrequestqueue;
     String tempMF;
@@ -90,13 +91,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        boolean Registered = sharedPreferences.getBoolean("Registered", false);
-//
-//        if (Registered == false){
-//            Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
-//            startActivityForResult(item_intent, 1);
-//        }
+        boolean Registered = sharedPreferences.getBoolean("Registered", false);
+
+        if (Registered == false){
+            Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
+            startActivityForResult(item_intent, 1);
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -116,5 +118,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (eCounter == 1){
+            this.finishAffinity();
+
+        }else {
+            eCounter ++;
+            Toast.makeText(getApplicationContext(), "برای خارج شدن از برنامه مجددا کلیک کنید", Toast.LENGTH_SHORT).show();
+        }
     }
 }
