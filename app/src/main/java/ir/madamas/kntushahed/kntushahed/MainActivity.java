@@ -3,6 +3,7 @@ package ir.madamas.kntushahed.kntushahed;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ir.madamas.kntushahed.kntushahed.Statics.attributes;
 import ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment;
 import ir.madamas.kntushahed.kntushahed.fragments.notificationFragment;
 
@@ -38,7 +40,7 @@ import static java.security.AccessController.getContext;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-
+    int eCounter = 0;
     RequestQueue myrequestqueue;
     String tempMF;
     SharedPreferences sharedPreferences;
@@ -77,7 +79,13 @@ public class MainActivity extends AppCompatActivity {
          fragmentManager = getSupportFragmentManager();
         FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
         frm.commit();
-
+        Thread th = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                checkupdate();
+            }
+        });
+        th.run();
       //  mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -90,19 +98,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        boolean Registered = sharedPreferences.getBoolean("Registered", false);
-
-        Thread th = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                checkupdate();
-            }
-        });
-        th.run();
-//        if (Registered == false){
-//            Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
-//            startActivityForResult(item_intent, 1);
-//        }
         boolean Registered = sharedPreferences.getBoolean("Registered", false);
 
         if (Registered == false){
