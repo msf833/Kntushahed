@@ -3,7 +3,6 @@ package ir.madamas.kntushahed.kntushahed;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -31,7 +30,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ir.madamas.kntushahed.kntushahed.Statics.attributes;
 import ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment;
 import ir.madamas.kntushahed.kntushahed.fragments.notificationFragment;
 
@@ -105,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
 //            Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
 //            startActivityForResult(item_intent, 1);
 //        }
+        boolean Registered = sharedPreferences.getBoolean("Registered", false);
+
+        if (Registered == false){
+            Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
+            startActivityForResult(item_intent, 1);
+        }
     }
 
     @Override
@@ -155,5 +159,18 @@ public class MainActivity extends AppCompatActivity {
         queue.add(sr);
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (eCounter == 1){
+            this.finishAffinity();
+
+        }else {
+            eCounter ++;
+            Toast.makeText(getApplicationContext(), "برای خارج شدن از برنامه مجددا کلیک کنید", Toast.LENGTH_SHORT).show();
+        }
     }
 }

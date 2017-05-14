@@ -3,7 +3,9 @@ package ir.madamas.kntushahed.kntushahed;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,16 +33,37 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import ir.madamas.kntushahed.kntushahed.classes.course;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static android.accounts.AccountManager.KEY_PASSWORD;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class SignupLoginActivity extends AppCompatActivity {
+
+    //stored data
+    SharedPreferences sharedPreferences;
 
     // UI references.
     private EditText username_signup;
@@ -51,10 +75,20 @@ public class SignupLoginActivity extends AppCompatActivity {
     private EditText stdID_signup;
     private ProgressBar ProgressView;
 
+    //exit counter
+    int eCounter = 0;
+
+    //volley RequestQueue
+    RequestQueue myrequestqueue;
+    String flag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_login);
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
 
         //progressBar
         ProgressView = (ProgressBar) findViewById(R.id.login_progress);
@@ -103,7 +137,14 @@ public class SignupLoginActivity extends AppCompatActivity {
                         isNameFamilyValid(Txt_family_signup) == true &&
                         isStdIDValid(Txt_stdID_signup) == true) {
 
-
+                        if (registerUser(Txt_username_signup, Txt_Password_signup, Txt_name_signup, Txt_family_signup)){
+                            Toast.makeText(getApplicationContext(), "yaaaaaaaaaaaaaaaaaaay *_*", Toast.LENGTH_SHORT).show();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putBoolean("Registered", true);
+                            finishActivity(1);
+                        }else {
+                            Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
+                        }
 
                 }
 
@@ -118,6 +159,66 @@ public class SignupLoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean registerUser(String u, String p, String n, final String f) {
+
+        Toast.makeText(getApplicationContext(), "Sending data...", Toast.LENGTH_SHORT).show();
+        myrequestqueue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject student = new JSONObject();
+        try {
+            student.put("phoneNum", u);
+            student.put("password", p);
+            student.put("name", n);
+            student.put("family", f);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        //http://api.mim-app.ir/SelectValue_coursesList.php
+        JsonObjectRequest jobrq = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/SelectValue_coursesList.php", student,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            JSONArray array = response.getJSONArray("search_resualt");
+
+                                JSONObject jsontemp = array.getJSONObject(0);
+
+                            Toast.makeText(getApplicationContext(), "ans: ^_^", Toast.LENGTH_SHORT).show();
+
+                                //flag = jsontemp.getString("flag");
+                                //Log.i("log"," flag : "+jsontemp.getString("flag"));
+                                Toast.makeText(getApplicationContext(), "ans:" + jsontemp.toString() + " ^_^", Toast.LENGTH_SHORT).show();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+
+
+        );
+        myrequestqueue.add(jobrq);
+
+//        if (flag.equals("true")){
+//            return true;
+//        }
+
+        return false;
     }
 
 
@@ -157,8 +258,21 @@ public class SignupLoginActivity extends AppCompatActivity {
 
             return true;
         }*/
-        return false;
+        return true;
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (eCounter == 1){
+
+            this.finishAffinity();
+
+        }else {
+            eCounter ++;
+            Toast.makeText(getApplicationContext(), "برای خارج شدن از برنامه مجددا کلیک کنید", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }
 
