@@ -37,6 +37,7 @@ public class EditPersonalInfo extends AppCompatActivity {
 
     RequestQueue myrequestqueue;
     String flag;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +65,7 @@ public class EditPersonalInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("name", TBox_name_edit.getText().toString().trim());
-                editor.putString("family", TBox_family_edit.getText().toString().trim());
-                editor.apply();
-
-                registerUser(Tbox_username_edit.getText().toString().trim(), TBox_password_edit.getText().toString().trim(),TBox_name_edit.getText().toString().trim(), TBox_family_edit.getText().toString().trim());
+                registerUser(TBox_name_edit.getText().toString(), TBox_family_edit.getText().toString());
 
             }
         });
@@ -79,7 +75,14 @@ public class EditPersonalInfo extends AppCompatActivity {
         TBox_password_edit.setText(sharedPreferences.getString("Password",""));
         TBox_name_edit.setText(sharedPreferences.getString("name",""));
         TBox_family_edit.setText(sharedPreferences.getString("family",""));
-        TBox_stdID_edit.setText(sharedPreferences.getString("schoolName",""));
+        TBox_stdID_edit.setText(sharedPreferences.getString("stdID",""));
+        userID = sharedPreferences.getString("userID","");
+        if (userID.length() < 2){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("Registered", false);
+            editor.apply();
+            finish();
+        }
 
     }
 
@@ -94,14 +97,14 @@ public class EditPersonalInfo extends AppCompatActivity {
 
     boolean flagTemp = false;
 
-    private void registerUser(String u, String p, final String n, final String f) {
+    private void registerUser(final String n, final String f) {
 
         myrequestqueue = Volley.newRequestQueue(getApplicationContext());
 
         JSONObject student = new JSONObject();
         try {
-            student.put("phoneNum", u);
-            student.put("password", p);
+
+            student.put("userID", userID);
             student.put("name", n);
             student.put("family", f);
 
@@ -109,7 +112,7 @@ public class EditPersonalInfo extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JsonObjectRequest jobrq = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/InsertValue_SignupActivity.php", student,
+        JsonObjectRequest jobrq = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/UpdateValue_EditInfoActivity.php", student,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -124,16 +127,23 @@ public class EditPersonalInfo extends AppCompatActivity {
 
                             if (flag.toString().startsWith("d")){
                                 flagTemp = true;
+                                Toast.makeText(getApplicationContext(), "flag: " + flag.toString(), Toast.LENGTH_SHORT).show();
 
+                            }else if (flag.toString().startsWith("u")){
+                                flagTemp = false;
+                                Toast.makeText(getApplicationContext(), "flag: " + flag.toString(), Toast.LENGTH_SHORT).show();
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean("Registered", false);
+                                editor.apply();
+                                finish();
                             }
 
                             if(flagTemp){
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putBoolean("Registered", true);
                                 editor.putString("name", n);
                                 editor.putString("family", f);
                                 editor.apply();
-                                editor.apply();
+                                Toast.makeText(getApplicationContext(), "تغییرات شما ذخیره شد :)", Toast.LENGTH_SHORT).show();
                                 finish();
                             }else {
                                 Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();

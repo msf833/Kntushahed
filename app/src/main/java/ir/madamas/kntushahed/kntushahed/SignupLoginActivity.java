@@ -81,6 +81,7 @@ public class SignupLoginActivity extends AppCompatActivity {
     //volley RequestQueue
     RequestQueue myrequestqueue;
     String flag;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,10 +185,11 @@ public class SignupLoginActivity extends AppCompatActivity {
                             JSONObject jsontemp = array.getJSONObject(0);
 
                             flag = jsontemp.getString("flag");
+                            userID = jsontemp.getString("studentID");
+                            Toast.makeText(getApplicationContext(), "userID: " + userID, Toast.LENGTH_SHORT).show();
 
                             if (flag.toString().startsWith("d")){
                                 flagTemp = true;
-
                             }
 
                             if(flagTemp){
@@ -198,7 +200,7 @@ public class SignupLoginActivity extends AppCompatActivity {
                                 editor.putString("name", n);
                                 editor.putString("family", f);
                                 editor.putString("stdID", s);
-                                editor.apply();
+                                editor.putString("userID", userID);
                                 editor.apply();
                                 finish();
                             }else {
