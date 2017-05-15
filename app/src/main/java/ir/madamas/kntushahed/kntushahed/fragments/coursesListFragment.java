@@ -1,8 +1,10 @@
 package ir.madamas.kntushahed.kntushahed.fragments;
 
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -39,7 +41,7 @@ import ir.madamas.kntushahed.kntushahed.R;
  * A simple {@link Fragment} subclass.
  */
 public class coursesListFragment extends Fragment {
-
+    SharedPreferences sharedPreferences;
     RequestQueue myrequestqueue;
     String tempMF;
     courseAdapter cadapter;
@@ -96,6 +98,9 @@ public class coursesListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String Temp="";
+                progressBar_courseList.setVisibility(View.VISIBLE);
+                btn_sendReq.setEnabled(false);
+                sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 JSONObject courses = new JSONObject();
                 try {
                     for (int i =0;i < selectedCourses.size();i++){
@@ -103,18 +108,56 @@ public class coursesListFragment extends Fragment {
                     }
                    // Toast.makeText(getContext(), Temp, Toast.LENGTH_SHORT).show();
                     courses.put("courseslist",Temp);
-
+                    courses.put("studentID",sharedPreferences.getString("stdID",""));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                // String json = new Gson().toJson(selectedCourses);
+                //sending request to server
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/InsertValue_courseListRequest_kntuShahed.php", courses,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+
+                                try {
+                                      JSONArray array = response.getJSONArray("courseBulkReserve");
+
+                                         JSONObject jsontemp = array.getJSONObject(0);
+                                          Log.i("log"," Bulk reserveanswer : "+ jsontemp.getString("flag"));
+                                    
+                                          Toast.makeText(getContext(), "درخواست شما ثبت شد ، با شما تماس خواهیم گرفت ", Toast.LENGTH_LONG).show();
+                                          progressBar_courseList.setVisibility(View.GONE);
+                                          btn_sendReq.setEnabled(true);
+
+                                   
+                                } catch (JSONException e1) {
+                                    e1.printStackTrace();
+                                }
+
+
+
+
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getContext(), "ثبت درخواست با مشکل مواجه شد ، بعدا دوباره تلاش کنید", Toast.LENGTH_SHORT).show();
+                                progressBar_courseList.setVisibility(View.GONE);
+                            }
+                        }
+
+
+                );
+                myrequestqueue.add(jsonObjectRequest);
 
             }
         });
         myrequestqueue = Volley.newRequestQueue(getContext());
 
-        JsonObjectRequest jobrq = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/SelectValue_coursesList.php", jsob,
+        JsonObjectRequest jobrq = new JsonObjectRequest(Request.Method.POST,"http://api.mim-app.ir/SelectValue_coursesList.php" , jsob,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
