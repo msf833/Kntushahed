@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "failed to  check update", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "مشکل در بروز رسانی نرم افزار ", Toast.LENGTH_SHORT).show();
                     }
                 }
         );

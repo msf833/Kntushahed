@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleDrawable = "@drawable/ic_dashboard_black_24dp"
+                app:passwordToggleDrawable = "@drawable/design_ic_visibility"
                 android:layoutDirection="rtl">
 
                 <EditText
