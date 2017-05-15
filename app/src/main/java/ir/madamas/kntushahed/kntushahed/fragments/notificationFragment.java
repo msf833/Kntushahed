@@ -68,7 +68,7 @@ public class notificationFragment extends Fragment {
         try {
             // Toast.makeText(getContext(), Temp, Toast.LENGTH_SHORT).show();
 
-            getNoti.put("studentID",sharedPreferences.getString("stdID",""));
+            getNoti.put("studentID",sharedPreferences.getString("userID",""));
 
         } catch (JSONException e) {
             e.printStackTrace();
