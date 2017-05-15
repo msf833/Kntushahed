@@ -5,6 +5,12 @@
     tools:context="ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment">
 
 
+    <ProgressBar
+        android:id="@+id/progressBar_courseList"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <ListView
         android:id="@+id/listView_fragment_courseList"
         android:layout_width="match_parent"
@@ -28,6 +34,6 @@
         android:layout_gravity="bottom|center"
         android:background="#87CEFA"
         android:text="ارسال درخواست کلاس"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
 </FrameLayout>

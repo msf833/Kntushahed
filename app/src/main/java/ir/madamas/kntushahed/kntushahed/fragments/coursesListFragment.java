@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,12 +50,14 @@ public class coursesListFragment extends Fragment {
         // Required empty public constructor
     }
 
+    ProgressBar progressBar_courseList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_courses_list, container, false);
+        progressBar_courseList = (ProgressBar) view.getRootView().findViewById(R.id.progressBar_courseList);
         return view;
 
     }
@@ -88,7 +91,7 @@ public class coursesListFragment extends Fragment {
             }
         });
         
-        Button btn_sendReq = (Button) getView().findViewById(R.id.btn_getData);
+        final Button btn_sendReq = (Button) getView().findViewById(R.id.btn_getData);
         btn_sendReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,6 +133,8 @@ public class coursesListFragment extends Fragment {
 
                             }
                             //listView.setAdapter(cadapter);
+                            progressBar_courseList.setVisibility(View.GONE);
+                            btn_sendReq.setVisibility(View.VISIBLE);
                             gridView.setAdapter(cadapter);
                         } catch (JSONException e) {
                             e.printStackTrace();

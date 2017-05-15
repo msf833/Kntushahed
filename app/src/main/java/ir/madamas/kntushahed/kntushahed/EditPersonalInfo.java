@@ -32,6 +32,7 @@ public class EditPersonalInfo extends AppCompatActivity {
 
     Button cancelBtn;
     Button confirmEdit;
+    Button logout_button;
 
     int backPressedCounter = 0;
 
@@ -61,6 +62,10 @@ public class EditPersonalInfo extends AppCompatActivity {
 
         confirmEdit = (Button) findViewById(R.id.edit_button);
 
+        //logout_button
+        logout_button = (Button) findViewById(R.id.logout_button);
+
+
         confirmEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +88,16 @@ public class EditPersonalInfo extends AppCompatActivity {
             editor.apply();
             finish();
         }
+
+        logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("Registered", false);
+                editor.apply();
+                finish();
+            }
+        });
 
     }
 

@@ -17,6 +17,7 @@
     <string name="action_confirmEdit">ثبت تغییرات</string>
     <string name="action_cancel">لغو</string>
     <string name="action_login">ورود</string>
+    <string name="action_logout">خروج</string>
     <string name="action_name_signup">نام</string>
     <string name="action_family_signup">نام خانوادگی</string>
     <string name="action_stdID_signup">شماره دانشجویی</string>

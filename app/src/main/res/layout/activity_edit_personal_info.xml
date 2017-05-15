@@ -32,6 +32,7 @@
                     android:hint="@string/prompt_username"
                     android:inputType="phone"
                     android:maxLines="1"
+                    android:enabled="false"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
@@ -48,6 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
+                    android:enabled="false"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
@@ -128,6 +130,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/action_cancel"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/logout_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/action_logout"
                 android:textStyle="bold" />
 
         </LinearLayout>
