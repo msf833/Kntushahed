@@ -112,15 +112,15 @@ public class SignupLoginActivity extends AppCompatActivity {
         host.setup();
 
         //Tab 1
-        TabHost.TabSpec spec = host.newTabSpec("ثبت نام");
-        spec.setContent(R.id.tab1);
-        spec.setIndicator("ثبت نام");
+        TabHost.TabSpec spec = host.newTabSpec("ورود");
+        spec.setContent(R.id.tab2);
+        spec.setIndicator("ورود");
         host.addTab(spec);
 
         //Tab 2
-        spec = host.newTabSpec("ورود");
-        spec.setContent(R.id.tab2);
-        spec.setIndicator("ورود");
+        spec = host.newTabSpec("ثبت نام");
+        spec.setContent(R.id.tab1);
+        spec.setIndicator("ثبت نام");
         host.addTab(spec);
 
         signun_button.setOnClickListener(new OnClickListener() {
@@ -142,6 +142,26 @@ public class SignupLoginActivity extends AppCompatActivity {
 
                 }
 
+                if (!isUsernameValid(Txt_username_signup)){
+                    username_signup.setError("شماره تلفن وارد شده معتبر نیست!");
+                }
+
+                if (!isPasswordValid(Txt_Password_signup)){
+                    Password_signup.setError("پسورد قویتری انتخاب کنید!");
+                }
+
+                if (!isNameFamilyValid(Txt_name_signup)){
+                    name_signup.setError("نام وارد شده صحیح نیست!");
+                }
+
+                if (!isNameFamilyValid(Txt_family_signup)){
+                    family_signup.setError("نام وارد شده صحیح نیست!");
+                }
+
+                if (!isStdIDValid(Txt_stdID_signup)){
+                    stdID_signup.setError("شماره دانشجویی باید بین 7 تا 15 رقم باشد!");
+                }
+
             }
         });
 
@@ -156,6 +176,14 @@ public class SignupLoginActivity extends AppCompatActivity {
 
                     loginUser(Txt_username_login, Txt_Password_login);
 
+                }
+
+                if (!isUsernameValid(Txt_username_login)){
+                    username_login.setError("شماره تلفن وارد شده معتبر نیست!");
+                }
+
+                if (!isPasswordValid(Txt_Password_login)){
+                    Password_login.setError("پسورد وارد شده صیح نیست!");
                 }
             }
         });
@@ -315,6 +343,10 @@ public class SignupLoginActivity extends AppCompatActivity {
 
 
     private boolean isUsernameValid(String phoneNum) {
+        if (phoneNum.startsWith("98") || phoneNum.startsWith("+98") ||phoneNum.startsWith("0")){
+            return false;
+        }
+
         if (phoneNum.startsWith("9")){
 
             return true;
@@ -322,8 +354,8 @@ public class SignupLoginActivity extends AppCompatActivity {
         return false;
     }
 
-    private boolean isPasswordValid(String name) {
-        if (name.length() > 4){
+    private boolean isPasswordValid(String password) {
+        if (password.length() > 4){
 
             return true;
         }
@@ -342,7 +374,7 @@ public class SignupLoginActivity extends AppCompatActivity {
         if (stdID.length() < 15 && stdID.length() >= 7){
             return true;
         }
-        return true;
+        return false;
     }
 
     @Override
