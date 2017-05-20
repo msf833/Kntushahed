@@ -126,6 +126,7 @@ public class SignupLoginActivity extends AppCompatActivity {
         signun_button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                ProgressView.setVisibility(View.VISIBLE);
                 String Txt_username_signup = username_signup.getText().toString();
                 String Txt_Password_signup = Password_signup.getText().toString();
                 String Txt_name_signup = name_signup.getText().toString();
@@ -144,22 +145,27 @@ public class SignupLoginActivity extends AppCompatActivity {
 
                 if (!isUsernameValid(Txt_username_signup)){
                     username_signup.setError("شماره تلفن وارد شده معتبر نیست!");
+                    ProgressView.setVisibility(View.GONE);
                 }
 
                 if (!isPasswordValid(Txt_Password_signup)){
                     Password_signup.setError("پسورد قویتری انتخاب کنید!");
+                    ProgressView.setVisibility(View.GONE);
                 }
 
                 if (!isNameFamilyValid(Txt_name_signup)){
                     name_signup.setError("نام وارد شده صحیح نیست!");
+                    ProgressView.setVisibility(View.GONE);
                 }
 
                 if (!isNameFamilyValid(Txt_family_signup)){
                     family_signup.setError("نام وارد شده صحیح نیست!");
+                    ProgressView.setVisibility(View.GONE);
                 }
 
                 if (!isStdIDValid(Txt_stdID_signup)){
                     stdID_signup.setError("شماره دانشجویی باید بین 7 تا 15 رقم باشد!");
+                    ProgressView.setVisibility(View.GONE);
                 }
 
             }
@@ -168,6 +174,7 @@ public class SignupLoginActivity extends AppCompatActivity {
         login_button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                ProgressView.setVisibility(View.VISIBLE);
                 String Txt_username_login = username_login.getText().toString();
                 String Txt_Password_login = Password_login.getText().toString();
 
@@ -180,10 +187,12 @@ public class SignupLoginActivity extends AppCompatActivity {
 
                 if (!isUsernameValid(Txt_username_login)){
                     username_login.setError("شماره تلفن وارد شده معتبر نیست!");
+                    ProgressView.setVisibility(View.GONE);
                 }
 
                 if (!isPasswordValid(Txt_Password_login)){
                     Password_login.setError("پسورد وارد شده صیح نیست!");
+                    ProgressView.setVisibility(View.GONE);
                 }
             }
         });

@@ -82,12 +82,12 @@ public class coursesListFragment extends Fragment {
                 String stv_coureID  =tv_coureID.getText().toString();
                 TextView temp = (TextView) view.findViewById(R.id.tv_coureID);
 
-                if (selectedCourses.contains(stv_coureID) == true){
+                if (selectedCourses.contains(stv_courseName) == true){
                     tv_courseName.setBackgroundColor(Color.WHITE);
-                    selectedCourses.remove(stv_coureID);
+                    selectedCourses.remove(stv_courseName);
                 }else {
                     tv_courseName.setBackgroundColor(Color.RED);
-                    selectedCourses.add(stv_coureID);
+                    selectedCourses.add(stv_courseName);
                 }
                 Log.i("log",selectedCourses.toString());
             }
@@ -108,7 +108,7 @@ public class coursesListFragment extends Fragment {
                     }
                    // Toast.makeText(getContext(), Temp, Toast.LENGTH_SHORT).show();
                     courses.put("courseslist",Temp);
-                    courses.put("studentID",sharedPreferences.getString("stdID",""));
+                    courses.put("studentID",sharedPreferences.getString("userID",""));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
