@@ -129,13 +129,14 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         }
-        if (id == R.id.search_menuBTN){
-//            Intent intent = new Intent(getApplicationContext(), EditPersonalInfo.class);
-//            startActivity(intent);
+        if (id == R.id.about_menuBTN){
+            Intent intent = new Intent(getApplicationContext(), about.class);
+          startActivity(intent);
 
 
             return true;
         }
+
 
 
         return super.onOptionsItemSelected(item);

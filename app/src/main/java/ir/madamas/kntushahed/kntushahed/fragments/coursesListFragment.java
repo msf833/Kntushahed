@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class coursesListFragment extends Fragment {
     ListView listView;
     GridView gridView;
     ArrayList<String> selectedCourses;
+    SearchView searchView;
     public coursesListFragment() {
         // Required empty public constructor
     }
@@ -70,6 +72,20 @@ public class coursesListFragment extends Fragment {
         JSONObject jsob = new JSONObject();
         selectedCourses = new ArrayList<>();
         cadapter = new courseAdapter(getContext(),R.layout.row_course);
+        searchView = (SearchView) getView().findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                cadapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
        // listView = (ListView) getView().findViewById(R.id.listView_fragment_courseList);
         gridView = (GridView)  getView().findViewById(R.id.gridView_fragment);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

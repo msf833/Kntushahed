@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -57,5 +58,11 @@ public class courseAdapter extends ArrayAdapter {
         TextView tv_courseID = (TextView) row.findViewById(R.id.tv_coureID);
         tv_courseID.setText(crs.getCourseID());
         return row;
+    }
+
+    @NonNull
+    @Override
+    public Filter getFilter() {
+        return super.getFilter();
     }
 }

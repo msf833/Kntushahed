@@ -14,8 +14,8 @@
         app:showAsAction="always" />
 
     <item
-    android:id="@+id/search_menuBTN"
-    android:icon="@android:drawable/ic_menu_search"
+    android:id="@+id/about_menuBTN"
+    android:icon="@android:drawable/ic_menu_info_details"
     android:title="+"
     app:showAsAction="always" />
 
