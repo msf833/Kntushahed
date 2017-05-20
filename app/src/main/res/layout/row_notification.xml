@@ -47,5 +47,6 @@
         android:layout_alignBottom="@+id/tv_notititle"
         android:layout_marginEnd="28dp"
         android:layout_toStartOf="@+id/tv_notititle"
-        android:text="زمان" />
+        android:text="زمان"
+        android:visibility="gone" />
 </RelativeLayout>

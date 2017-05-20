@@ -3,14 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/otherlesson"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="درخواست درسی که توی لیست نیست"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/add"
         android:icon="@android:drawable/ic_menu_myplaces"
         android:title="+"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/otherlesson"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="درخواست درسی که توی لیست نیست"
+        app:showAsAction="always" />
+
+    <item
+    android:id="@+id/search_menuBTN"
+    android:icon="@android:drawable/ic_menu_search"
+    android:title="+"
+    app:showAsAction="always" />
 
 </menu>

@@ -2,7 +2,7 @@
     <string name="app_name">کلاس شاهد</string>
     <string name="title_home">خانه</string>
     <string name="title_dashboard">لیست دروس</string>
-    <string name="title_notifications">اعلانیه ها</string>
+    <string name="title_notifications">اطلاعیه ها</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -30,4 +30,5 @@
 
         completions."
     </string>
+    <string name="title_activity_extra_course_req">ExtraCourseReq</string>
 </resources>

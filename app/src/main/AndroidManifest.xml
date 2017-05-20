@@ -29,7 +29,11 @@
         <activity
             android:name=".SignupLoginActivity"
             android:label="@string/title_activity_signup_login" />
-        <activity android:name=".EditPersonalInfo"></activity>
+        <activity android:name=".EditPersonalInfo" />
+        <activity
+            android:name=".ExtraCourseReq"
+            android:label="@string/title_activity_extra_course_req"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -123,13 +123,20 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } 
         if (id == R.id.otherlesson){
+            Intent intent = new Intent(getApplicationContext(), ExtraCourseReq.class);
+          startActivity(intent);
+
+
+            return true;
+        }
+        if (id == R.id.search_menuBTN){
 //            Intent intent = new Intent(getApplicationContext(), EditPersonalInfo.class);
 //            startActivity(intent);
 
-            Toast.makeText(getApplicationContext(), "im here assholes ", Toast.LENGTH_SHORT).show();
+
             return true;
         }
-        
+
 
         return super.onOptionsItemSelected(item);
     }

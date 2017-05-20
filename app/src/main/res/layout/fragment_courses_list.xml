@@ -5,35 +5,41 @@
     tools:context="ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment">
 
 
-    <ProgressBar
-        android:id="@+id/progressBar_courseList"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <ListView
-        android:id="@+id/listView_fragment_courseList"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_height="match_parent">
 
+        <ProgressBar
+            android:id="@+id/progressBar_courseList"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <GridView
-        android:id="@+id/gridView_fragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:columnWidth="70dp"
-        android:gravity="center"
-        android:numColumns="2"
-        android:stretchMode="columnWidth" />
+        <ListView
+            android:id="@+id/listView_fragment_courseList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
-    <Button
-        android:id="@+id/btn_getData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:background="#87CEFA"
-        android:text="ارسال درخواست کلاس"
-        android:visibility="invisible" />
+        <GridView
+            android:id="@+id/gridView_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="70dp"
+            android:gravity="center"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:layout_above="@+id/btn_getData" />
+
+        <Button
+            android:id="@+id/btn_getData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#87CEFA"
+            android:text="ارسال درخواست کلاس"
+            android:visibility="visible" />
+    </RelativeLayout>
+
 
 </FrameLayout>

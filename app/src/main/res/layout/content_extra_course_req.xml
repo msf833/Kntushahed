@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ir.madamas.kntushahed.kntushahed.ExtraCourseReq"
+    tools:showIn="@layout/activity_extra_course_req">
+
+    <ProgressBar
+        android:id="@+id/progressBar_ExtraCourse"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_extracourseActivity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="در صورتی که درسی رو میخوای و توی لیست درسا نبود اینجا اسمشو بنویس و درخواست رو بزن :"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editText_extra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textView"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="اسم درس "
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btn_extracourseActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#87CEFA"
+        android:text="ثبت درخواست"
+        android:textSize="18sp"
+        android:layout_below="@+id/editText_extra"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
