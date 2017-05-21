@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.GridLayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -70,6 +73,10 @@ public class coursesListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         JSONObject jsob = new JSONObject();
+        Animation anim_m_right = AnimationUtils.loadAnimation(getContext(),R.anim.move_right);
+        Animation anim_m_left = AnimationUtils.loadAnimation(getContext(),R.anim.move_left);
+
+
         selectedCourses = new ArrayList<>();
         cadapter = new courseAdapter(getContext(),R.layout.row_course);
         searchView = (SearchView) getView().findViewById(R.id.searchView);
@@ -88,6 +95,10 @@ public class coursesListFragment extends Fragment {
 
        // listView = (ListView) getView().findViewById(R.id.listView_fragment_courseList);
         gridView = (GridView)  getView().findViewById(R.id.gridView_fragment);
+        //gridView.setAnimation(anim_m_left);
+        //gridView.startAnimation(anim_m_right);
+        GridLayoutAnimationController controller = new GridLayoutAnimationController(anim_m_right, .2f, .2f);
+        gridView.setLayoutAnimation(controller);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -177,7 +188,7 @@ public class coursesListFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        String courseID , courseName;
+                        String courseID , courseName , courseImageUrl;
                         try {
                             JSONArray array = response.getJSONArray("lessons_list");
 
@@ -187,7 +198,8 @@ public class coursesListFragment extends Fragment {
                                 Log.i("log"," courseName : "+jsontemp.getString("courseName") +"courseID "+jsontemp.getString("courseID"));
                                 courseName = jsontemp.getString("courseName");
                                 courseID =  jsontemp.getString("courseID");
-                                course ocourse= new course(courseID,courseName);
+                                courseImageUrl = jsontemp.getString("courseImageUrl");
+                                course ocourse= new course(courseID,courseName,courseImageUrl);
                                cadapter.add(ocourse);
 
                             }

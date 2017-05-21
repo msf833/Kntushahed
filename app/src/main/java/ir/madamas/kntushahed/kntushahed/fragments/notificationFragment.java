@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.GridLayoutAnimationController;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -64,6 +67,11 @@ public class notificationFragment extends Fragment {
         myrequestqueue = Volley.newRequestQueue(getContext());
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         notification_progressBar.setVisibility(View.VISIBLE);
+        Animation anim_m_right = AnimationUtils.loadAnimation(getContext(),R.anim.move_right);
+        Animation anim_m_left = AnimationUtils.loadAnimation(getContext(),R.anim.move_left);
+
+
+        listView.startAnimation(anim_m_right);
         JSONObject getNoti = new JSONObject();
         try {
             // Toast.makeText(getContext(), Temp, Toast.LENGTH_SHORT).show();

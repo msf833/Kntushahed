@@ -25,6 +25,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -89,6 +91,8 @@ public class SignupLoginActivity extends AppCompatActivity {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        Animation anim_m_right = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.move_right);
+        Animation anim_m_left = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.move_left);
 
         //progressBar
         ProgressView = (ProgressBar) findViewById(R.id.login_progress);
@@ -108,6 +112,7 @@ public class SignupLoginActivity extends AppCompatActivity {
         //mLoginFormView = findViewById(R.id.login_form);
 
         TabHost host = (TabHost)findViewById(R.id.tabHost);
+        host.startAnimation(anim_m_left);
         host.setup();
 
         //Tab 1

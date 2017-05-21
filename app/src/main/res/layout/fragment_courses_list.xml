@@ -14,9 +14,17 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textView4"
+            android:layout_toEndOf="@+id/listView_fragment_courseList"
             app:defaultQueryHint="جستجو.."
-            app:queryHint="جستجو.."
-           />
+            app:queryHint="جستجو.." />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="درسهای موردنظر خود را انتخاب کنید :"
+            android:textSize="18sp" />
 
         <ProgressBar
             android:id="@+id/progressBar_courseList"

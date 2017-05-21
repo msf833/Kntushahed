@@ -7,7 +7,25 @@ package ir.madamas.kntushahed.kntushahed.classes;
 public class course {
 
 
-    String courseID , courseName;
+    String courseID;
+    String courseName;
+
+    public String getCourseImageUrl() {
+        return courseImageUrl;
+    }
+
+    public void setCourseImageUrl(String courseImageUrl) {
+        this.courseImageUrl = courseImageUrl;
+    }
+
+    public course(String courseID, String courseName, String courseImageUrl) {
+
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.courseImageUrl = courseImageUrl;
+    }
+
+    String courseImageUrl;
 
     public course(String courseID, String courseName) {
         this.courseID = courseID;
