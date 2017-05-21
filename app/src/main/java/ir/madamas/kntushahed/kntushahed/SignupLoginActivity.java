@@ -61,7 +61,6 @@ import static android.accounts.AccountManager.KEY_PASSWORD;
  * A login screen that offers login via email/password.
  */
 public class SignupLoginActivity extends AppCompatActivity {
-
     //stored data
     SharedPreferences sharedPreferences;
 
