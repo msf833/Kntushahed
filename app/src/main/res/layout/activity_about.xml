@@ -38,45 +38,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="تکست معرفی برنامه اینجا وارد خواهد شد :)"
-                android:textSize="18sp" />
+                android:text="باتوجه به اینکه دانشجوبان شاهد و ایثارگر دانشجویانی باهوش و متعهد هستند ولی در سالهای اخیر مشاهده کرده ایم که این دانشجویان با افت تحصیلی مواجه شده اند . لذا برآن شدیم که با ایجاد این طرح به پیشرفت هرچه بیشتر انها کمک نموده و یار یکدیگر باشیم این برنامه بخشی از سند اوج میباشد که برای افزایش سطح علمی  شاهد و ایثارگر دانشگاه طراحی شده  و تمام حقوق آن محفوظ است "
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="ما را با دوستانتان به اشتراک بگذارید"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/imageButton9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_notifications_black_24dp" />
-
-                <ImageButton
-                    android:id="@+id/imageButton8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_notifications_black_24dp" />
-
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="?attr/actionModeShareDrawable" />
-            </LinearLayout>
+                android:text="طراحی و پیاده سازی : محمد شاهسون فولادی _ علی قاسم زاده"
+                android:textSize="14sp"
+                android:visibility="visible" />
 
         </LinearLayout>
+
+
     </ScrollView>
 
 </RelativeLayout>
