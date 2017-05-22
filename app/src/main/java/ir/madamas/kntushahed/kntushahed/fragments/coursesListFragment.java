@@ -45,6 +45,10 @@ import ir.madamas.kntushahed.kntushahed.R;
  * A simple {@link Fragment} subclass.
  */
 public class coursesListFragment extends Fragment {
+
+    int courseSelectedCounter = 0;
+    TextView textView4;
+    Button btn_sendReq;
     SharedPreferences sharedPreferences;
     RequestQueue myrequestqueue;
     String tempMF;
@@ -76,6 +80,7 @@ public class coursesListFragment extends Fragment {
         Animation anim_m_right = AnimationUtils.loadAnimation(getContext(),R.anim.move_right);
         Animation anim_m_left = AnimationUtils.loadAnimation(getContext(),R.anim.move_left);
 
+        textView4 = (TextView) getView().findViewById(R.id.textView4);
 
         selectedCourses = new ArrayList<>();
         cadapter = new courseAdapter(getContext(),R.layout.row_course);
@@ -95,6 +100,7 @@ public class coursesListFragment extends Fragment {
 
        // listView = (ListView) getView().findViewById(R.id.listView_fragment_courseList);
         gridView = (GridView)  getView().findViewById(R.id.gridView_fragment);
+
         //gridView.setAnimation(anim_m_left);
         //gridView.startAnimation(anim_m_right);
         GridLayoutAnimationController controller = new GridLayoutAnimationController(anim_m_right, .2f, .2f);
@@ -110,17 +116,29 @@ public class coursesListFragment extends Fragment {
                 TextView temp = (TextView) view.findViewById(R.id.tv_coureID);
 
                 if (selectedCourses.contains(stv_courseName) == true){
-                    tv_courseName.setBackgroundColor(Color.WHITE);
+
+                    //tv_courseName.setBackgroundColor(Color.WHITE);
+                    view.setBackgroundColor(Color.parseColor("#fffdf5"));
                     selectedCourses.remove(stv_courseName);
+                    courseSelectedCounter--;
+                    if (courseSelectedCounter == 0){
+                        btn_sendReq.setVisibility(View.GONE);
+                    }
+
                 }else {
-                    tv_courseName.setBackgroundColor(Color.RED);
+                    //tv_courseName.setBackgroundColor(Color.RED);
+                    view.setBackgroundColor(Color.parseColor("#FFFFECB8"));
                     selectedCourses.add(stv_courseName);
+                    courseSelectedCounter++;
+                    if (courseSelectedCounter > 0){
+                        btn_sendReq.setVisibility(View.VISIBLE);
+                    }
                 }
                 Log.i("log",selectedCourses.toString());
             }
         });
         
-        final Button btn_sendReq = (Button) getView().findViewById(R.id.btn_getData);
+        btn_sendReq = (Button) getView().findViewById(R.id.btn_getData);
         btn_sendReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,7 +223,9 @@ public class coursesListFragment extends Fragment {
                             }
                             //listView.setAdapter(cadapter);
                             progressBar_courseList.setVisibility(View.GONE);
-                            btn_sendReq.setVisibility(View.VISIBLE);
+                            searchView.setVisibility(View.VISIBLE);
+                            textView4.setVisibility(View.VISIBLE);
+                            //btn_sendReq.setVisibility(View.VISIBLE);
                             gridView.setAdapter(cadapter);
                         } catch (JSONException e) {
                             e.printStackTrace();

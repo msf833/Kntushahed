@@ -23,7 +23,8 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="در صورتی که درسی رو میخوای و توی لیست درسا نبود اینجا اسمشو بنویس و درخواست رو بزن :"
+        android:padding="15dp"
+        android:text="در صورتی که درسی رو میخوای و توی لیست درسا نبود اینجا اسمشو بنویس و درخواست رو بزن"
         android:textSize="18sp" />
 
     <EditText
@@ -41,9 +42,9 @@
         android:id="@+id/btn_extracourseActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#87CEFA"
+        android:background="#bdcfda"
         android:text="ثبت درخواست"
         android:textSize="18sp"
-        android:layout_below="@+id/editText_extra"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/progressBar_ExtraCourse" />
 </RelativeLayout>

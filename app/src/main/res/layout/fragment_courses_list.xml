@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#fffdf5">
 
         <SearchView
             android:id="@+id/searchView"
@@ -16,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView4"
             android:layout_toEndOf="@+id/listView_fragment_courseList"
+            android:visibility="gone"
             app:defaultQueryHint="جستجو.."
             app:queryHint="جستجو.." />
 
@@ -23,8 +25,11 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="درسهای موردنظر خود را انتخاب کنید :"
-            android:textSize="18sp" />
+            android:text="درسهای موردنظر خود را انتخاب کنید"
+            android:padding="15dp"
+            android:textColor="#9f0b3f"
+            android:textSize="24sp"
+            android:visibility="gone" />
 
         <ProgressBar
             android:id="@+id/progressBar_courseList"
@@ -54,9 +59,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#87CEFA"
+            android:background="#92b1c4"
+            android:textColor="#fff"
+            android:textSize="18dp"
             android:text="ارسال درخواست کلاس"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </RelativeLayout>
 
 

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fffdf5"
     tools:context="ir.madamas.kntushahed.kntushahed.fragments.notificationFragment">
 
     <ProgressBar
@@ -12,7 +13,7 @@
         android:visibility="gone" />
 
     <ListView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/listview_notifi"></ListView>
+        android:id="@+id/listview_notifi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
 </FrameLayout>
