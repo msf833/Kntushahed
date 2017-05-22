@@ -94,6 +94,7 @@ public class coursesListFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 cadapter.getFilter().filter(newText);
+
                 return false;
             }
         });
@@ -118,7 +119,7 @@ public class coursesListFragment extends Fragment {
                 if (selectedCourses.contains(stv_courseName) == true){
 
                     //tv_courseName.setBackgroundColor(Color.WHITE);
-                    view.setBackgroundColor(Color.parseColor("#fffdf5"));
+                    view.findViewById(R.id.background_layout).setBackgroundColor(Color.parseColor("#fffdf5"));
                     selectedCourses.remove(stv_courseName);
                     courseSelectedCounter--;
                     if (courseSelectedCounter == 0){
@@ -127,7 +128,7 @@ public class coursesListFragment extends Fragment {
 
                 }else {
                     //tv_courseName.setBackgroundColor(Color.RED);
-                    view.setBackgroundColor(Color.parseColor("#FFFFECB8"));
+                    view.findViewById(R.id.background_layout).setBackgroundColor(Color.parseColor("#FFFFECB8"));
                     selectedCourses.add(stv_courseName);
                     courseSelectedCounter++;
                     if (courseSelectedCounter > 0){
@@ -209,7 +210,7 @@ public class coursesListFragment extends Fragment {
                         String courseID , courseName , courseImageUrl;
                         try {
                             JSONArray array = response.getJSONArray("lessons_list");
-
+                            Log.i("request","on responsed listener");
 
                             for (int i =0;i<array.length();i++){
                                 JSONObject jsontemp = array.getJSONObject(i);
@@ -237,7 +238,7 @@ public class coursesListFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.i("request","on error listener");
                     }
                 }
 
@@ -246,4 +247,5 @@ public class coursesListFragment extends Fragment {
         myrequestqueue.add(jobrq);
 
     }
+
 }
