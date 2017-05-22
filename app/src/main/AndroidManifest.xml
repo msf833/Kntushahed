@@ -34,7 +34,8 @@
             android:name=".ExtraCourseReq"
             android:label="@string/title_activity_extra_course_req"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".about"></activity>
+        <activity android:name=".about" />
+        <activity android:name=".splash"></activity>
     </application>
 
 </manifest>

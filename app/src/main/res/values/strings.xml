@@ -31,4 +31,8 @@
         completions."
     </string>
     <string name="title_activity_extra_course_req">درخواست درس</string>
+
+    <string name="title_activity_splash_screen_activity">splashScreen_activity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

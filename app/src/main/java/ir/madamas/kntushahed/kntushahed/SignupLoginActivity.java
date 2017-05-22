@@ -3,6 +3,7 @@ package ir.madamas.kntushahed.kntushahed;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
@@ -250,6 +251,8 @@ public class SignupLoginActivity extends AppCompatActivity {
                                 editor.putString("stdID", s);
                                 editor.putString("userID", userID);
                                 editor.apply();
+                                Intent item_intent = new Intent(getApplicationContext(), splash.class);
+                                startActivity(item_intent);
                                 finish();
                             }else {
                                 Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
@@ -322,6 +325,8 @@ public class SignupLoginActivity extends AppCompatActivity {
                                 editor.putString("stdID", s);
                                 editor.putString("userID", userID);
                                 editor.apply();
+                                Intent item_intent = new Intent(getApplicationContext(), splash.class);
+                                startActivity(item_intent);
                                 finish();
                             }else {
                                 Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();

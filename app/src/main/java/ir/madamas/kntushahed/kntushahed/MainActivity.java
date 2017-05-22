@@ -95,15 +95,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    static boolean flag = true;
+
     @Override
     protected void onResume() {
         super.onResume();
         boolean Registered = sharedPreferences.getBoolean("Registered", false);
-
         if (Registered == false){
             Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
             startActivity(item_intent);
         }
+
+        if (flag) {
+            Intent item_intent = new Intent(getApplicationContext(), splash.class);
+            startActivity(item_intent);
+            flag = false;
+        }
+
     }
 
     @Override
@@ -163,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "مشکل در بروز رسانی نرم افزار ", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "مشکل در بروز رسانی نرم افزار ", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
