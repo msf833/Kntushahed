@@ -4,12 +4,14 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -43,28 +45,30 @@ public class courseAdapter extends ArrayAdapter {
 
 
     public course getItem(int position) {
-        return  (course)list.get(position);
+        return  list.get(position);
     }
 
-
+    @NonNull
     public View getView(int position, View convertView, ViewGroup parent) {
         View row ;
         row = convertView;
-
+        RecyclerView.ViewHolder holder = null;
+//        View view = super.getView(position, convertView, parent);
         if (row == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = layoutInflater.inflate(R.layout.row_course, null, false);
+            row = layoutInflater.inflate(R.layout.row_course, parent,false);
         }
 
-        course crs = (course) getItem(position);
+        course crs = getItem(position);
 
         TextView tv_crsfName = (TextView) row.findViewById(R.id.tv_courseName);
         tv_crsfName.setText(crs.getCourseName());
+        RelativeLayout relativeLayout = (RelativeLayout) row.findViewById(R.id.background_layout);
         TextView tv_courseID = (TextView) row.findViewById(R.id.tv_coureID);
         tv_courseID.setText(crs.getCourseID());
 
         String imageurl = crs.getCourseImageUrl();
-        if (imageurl.equals("")){
+        if(imageurl.equals("")){
 
         }
         else {

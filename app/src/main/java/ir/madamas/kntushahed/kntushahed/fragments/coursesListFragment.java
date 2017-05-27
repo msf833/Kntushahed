@@ -14,11 +14,13 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.GridLayoutAnimationController;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,42 +101,62 @@ public class coursesListFragment extends Fragment {
             }
         });
 
-       // listView = (ListView) getView().findViewById(R.id.listView_fragment_courseList);
-        gridView = (GridView)  getView().findViewById(R.id.gridView_fragment);
+       listView = (ListView) getView().findViewById(R.id.listView_fragment_courseList);
+      //  gridView = (GridView)  getView().findViewById(R.id.gridView_fragment);
 
         //gridView.setAnimation(anim_m_left);
         //gridView.startAnimation(anim_m_right);
-        GridLayoutAnimationController controller = new GridLayoutAnimationController(anim_m_right, .2f, .2f);
-        gridView.setLayoutAnimation(controller);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //GridLayoutAnimationController controller = new GridLayoutAnimationController(anim_m_right, .2f, .2f);
+      // gridView.setLayoutAnimation(controller);
+//      gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+//          @Override
+//          public void onScrollStateChanged(AbsListView view, int scrollState) {
+//              Toast.makeText(getContext(), "yeah mother fucker", Toast.LENGTH_SHORT).show();
+//          }
+//
+//          @Override
+//          public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//
+//          }
+//      });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               // Toast.makeText(getContext(), "slm dude ", Toast.LENGTH_SHORT).show();
+                cadapter.notifyDataSetChanged();
+
+                listView.getChildAt(position).setBackgroundColor(Color.parseColor("#ffabf6"));
                 TextView tv_courseName = (TextView) view.findViewById(R.id.tv_courseName);
-                String stv_courseName =tv_courseName.getText().toString();
+                String stv_courseName =tv_courseName.getText().toString().trim();
                 TextView tv_coureID = (TextView) view.findViewById(R.id.tv_coureID);
                 String stv_coureID  =tv_coureID.getText().toString();
-                TextView temp = (TextView) view.findViewById(R.id.tv_coureID);
+                Log.i("position",position +"");
+                RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.background_layout);
 
-                if (selectedCourses.contains(stv_courseName) == true){
+//                if(position == gridView.getSelectedItemPosition())
+//                    relativeLayout.setBackgroundColor(Color.parseColor("#fffdf5"));
+
+                if (selectedCourses.contains(stv_courseName) ){
 
                     //tv_courseName.setBackgroundColor(Color.WHITE);
-                    view.findViewById(R.id.background_layout).setBackgroundColor(Color.parseColor("#fffdf5"));
+                   // relativeLayout.setBackgroundColor(Color.parseColor("#fffdf5"));
+
                     selectedCourses.remove(stv_courseName);
-                    courseSelectedCounter--;
-                    if (courseSelectedCounter == 0){
+
+                    if (selectedCourses.size() == 0){
                         btn_sendReq.setVisibility(View.GONE);
                     }
 
                 }else {
-                    //tv_courseName.setBackgroundColor(Color.RED);
-                    view.findViewById(R.id.background_layout).setBackgroundColor(Color.parseColor("#FFFFECB8"));
-                    selectedCourses.add(stv_courseName);
-                    courseSelectedCounter++;
-                    if (courseSelectedCounter > 0){
+                  // tv_courseName.setBackgroundColor(Color.RED);
+                    relativeLayout.setBackgroundColor(Color.parseColor("#FFFFECB8"));
+                    //selectedCourses.add(stv_courseName);
+
+                    if (selectedCourses.size()  > 0){
                         btn_sendReq.setVisibility(View.VISIBLE);
                     }
                 }
+
+                cadapter.notifyDataSetChanged();
                 Log.i("log",selectedCourses.toString());
             }
         });
@@ -227,7 +249,7 @@ public class coursesListFragment extends Fragment {
                             searchView.setVisibility(View.VISIBLE);
                             textView4.setVisibility(View.VISIBLE);
                             //btn_sendReq.setVisibility(View.VISIBLE);
-                            gridView.setAdapter(cadapter);
+                            listView.setAdapter(cadapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

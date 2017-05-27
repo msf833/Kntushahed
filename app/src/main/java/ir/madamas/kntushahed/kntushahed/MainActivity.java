@@ -32,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ir.madamas.kntushahed.kntushahed.Statics.attributes;
+import ir.madamas.kntushahed.kntushahed.fragments.RecylceBased_couseListFragment;
 import ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment;
 import ir.madamas.kntushahed.kntushahed.fragments.notificationFragment;
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.navigation_home:
                    /// mTextMessage.setText(R.string.title_dashboard);
-                    FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
+                    FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new RecylceBased_couseListFragment());
                     frm.commit();
                     return true;
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         myrequestqueue = Volley.newRequestQueue(getApplicationContext());
          fragmentManager = getSupportFragmentManager();
-        FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
+        FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new RecylceBased_couseListFragment());
         frm.commit();
         Thread th = new Thread(new Runnable() {
             @Override
