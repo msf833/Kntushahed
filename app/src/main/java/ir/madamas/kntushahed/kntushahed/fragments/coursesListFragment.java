@@ -101,13 +101,13 @@ public class coursesListFragment extends Fragment {
             }
         });
 
-       listView = (ListView) getView().findViewById(R.id.listView_fragment_courseList);
-      //  gridView = (GridView)  getView().findViewById(R.id.gridView_fragment);
+       //listView = (ListView) getView().findViewById(R.id.listView_fragment_courseList);
+       gridView = (GridView)  getView().findViewById(R.id.gridView_fragment);
 
-        //gridView.setAnimation(anim_m_left);
-        //gridView.startAnimation(anim_m_right);
-        //GridLayoutAnimationController controller = new GridLayoutAnimationController(anim_m_right, .2f, .2f);
-      // gridView.setLayoutAnimation(controller);
+        gridView.setAnimation(anim_m_left);
+        gridView.startAnimation(anim_m_right);
+        GridLayoutAnimationController controller = new GridLayoutAnimationController(anim_m_right, .2f, .2f);
+       gridView.setLayoutAnimation(controller);
 //      gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
 //          @Override
 //          public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -119,12 +119,12 @@ public class coursesListFragment extends Fragment {
 //
 //          }
 //      });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                cadapter.notifyDataSetChanged();
 
-                listView.getChildAt(position).setBackgroundColor(Color.parseColor("#ffabf6"));
+
+
                 TextView tv_courseName = (TextView) view.findViewById(R.id.tv_courseName);
                 String stv_courseName =tv_courseName.getText().toString().trim();
                 TextView tv_coureID = (TextView) view.findViewById(R.id.tv_coureID);
@@ -132,15 +132,12 @@ public class coursesListFragment extends Fragment {
                 Log.i("position",position +"");
                 RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.background_layout);
 
-//                if(position == gridView.getSelectedItemPosition())
-//                    relativeLayout.setBackgroundColor(Color.parseColor("#fffdf5"));
+
 
                 if (selectedCourses.contains(stv_courseName) ){
 
-                    //tv_courseName.setBackgroundColor(Color.WHITE);
-                   // relativeLayout.setBackgroundColor(Color.parseColor("#fffdf5"));
-
                     selectedCourses.remove(stv_courseName);
+                    cadapter.getItem(position).setSelected(false);
 
                     if (selectedCourses.size() == 0){
                         btn_sendReq.setVisibility(View.GONE);
@@ -148,8 +145,9 @@ public class coursesListFragment extends Fragment {
 
                 }else {
                   // tv_courseName.setBackgroundColor(Color.RED);
-                    relativeLayout.setBackgroundColor(Color.parseColor("#FFFFECB8"));
-                    //selectedCourses.add(stv_courseName);
+                   // relativeLayout.setBackgroundColor(Color.parseColor("#FFFFECB8"));
+                    selectedCourses.add(stv_courseName);
+                    cadapter.getItem(position).setSelected(true);
 
                     if (selectedCourses.size()  > 0){
                         btn_sendReq.setVisibility(View.VISIBLE);
@@ -249,7 +247,7 @@ public class coursesListFragment extends Fragment {
                             searchView.setVisibility(View.VISIBLE);
                             textView4.setVisibility(View.VISIBLE);
                             //btn_sendReq.setVisibility(View.VISIBLE);
-                            listView.setAdapter(cadapter);
+                            gridView.setAdapter(cadapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

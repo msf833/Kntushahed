@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.navigation_home:
                    /// mTextMessage.setText(R.string.title_dashboard);
-                    FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new RecylceBased_couseListFragment());
+                    FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
                     frm.commit();
                     return true;
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         myrequestqueue = Volley.newRequestQueue(getApplicationContext());
          fragmentManager = getSupportFragmentManager();
-        FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new RecylceBased_couseListFragment());
+        FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
         frm.commit();
         Thread th = new Thread(new Runnable() {
             @Override

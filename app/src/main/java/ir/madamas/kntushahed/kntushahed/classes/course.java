@@ -9,6 +9,15 @@ public class course {
 
     String courseID;
     String courseName;
+boolean isSelected = false;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     public String getCourseImageUrl() {
         return courseImageUrl;

@@ -1,6 +1,7 @@
 package ir.madamas.kntushahed.kntushahed.classes;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,8 +53,7 @@ public class courseAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View row ;
         row = convertView;
-        RecyclerView.ViewHolder holder = null;
-//        View view = super.getView(position, convertView, parent);
+     ;
         if (row == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.row_course, parent,false);
@@ -75,7 +75,13 @@ public class courseAdapter extends ArrayAdapter {
             ImageView IV_goodtpic = (ImageView) row.findViewById(R.id.iv_row_course);
             Picasso.with(getContext()).load(imageurl).into(IV_goodtpic);
         }
-
+            if (crs.isSelected()){
+                relativeLayout.setBackgroundColor(Color.parseColor("#FFFFECB8"));
+             //  this.notifyDataSetChanged();
+            }else{
+                relativeLayout.setBackgroundColor(Color.WHITE);
+                //this.notifyDataSetChanged();
+            }
         return row;
     }
 
