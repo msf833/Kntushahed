@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
     void checkupdate(){
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-      final   String DownloadupdateLink = "http://api.mim-app.ir/kntuShahedApp/app.apk";
+      final   String DownloadupdateLink = "http://api.mim-app.ir/kntuShahedApp/kntushahed.apk";
         StringRequest sr = new StringRequest(Request.Method.POST, "http://api.mim-app.ir/app_update.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

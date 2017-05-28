@@ -1,12 +1,14 @@
 package ir.madamas.kntushahed.kntushahed.fragments;
 
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,13 +92,14 @@ public class coursesListFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                cadapter.notifyDataSetChanged();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 cadapter.getFilter().filter(newText);
-
+                cadapter.notifyDataSetChanged();
                 return false;
             }
         });
@@ -138,6 +141,7 @@ public class coursesListFragment extends Fragment {
 
                     selectedCourses.remove(stv_courseName);
                     cadapter.getItem(position).setSelected(false);
+                    cadapter.getItemFilter(position).setSelected(false);
 
                     if (selectedCourses.size() == 0){
                         btn_sendReq.setVisibility(View.GONE);
@@ -148,6 +152,7 @@ public class coursesListFragment extends Fragment {
                    // relativeLayout.setBackgroundColor(Color.parseColor("#FFFFECB8"));
                     selectedCourses.add(stv_courseName);
                     cadapter.getItem(position).setSelected(true);
+                    cadapter.getItemFilter(position).setSelected(true);
 
                     if (selectedCourses.size()  > 0){
                         btn_sendReq.setVisibility(View.VISIBLE);
@@ -163,61 +168,96 @@ public class coursesListFragment extends Fragment {
         btn_sendReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Temp="";
+
                 progressBar_courseList.setVisibility(View.VISIBLE);
-                btn_sendReq.setEnabled(false);
-                sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                JSONObject courses = new JSONObject();
-                try {
-                    for (int i =0;i < selectedCourses.size();i++){
-                         Temp += selectedCourses.get(i)+":";
-                    }
-                   // Toast.makeText(getContext(), Temp, Toast.LENGTH_SHORT).show();
-                    courses.put("courseslist",Temp);
-                    courses.put("studentID",sharedPreferences.getString("userID",""));
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-               // String json = new Gson().toJson(selectedCourses);
-                //sending request to server
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/InsertValue_courseListRequest_kntuShahed.php", courses,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
 
-                                try {
-                                      JSONArray array = response.getJSONArray("courseBulkReserve");
+                AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
+                alert_builder.setIcon(R.drawable.ic_notifications_black_24dp);
 
-                                         JSONObject jsontemp = array.getJSONObject(0);
-                                          Log.i("log"," Bulk reserveanswer : "+ jsontemp.getString("flag"));
-                                    
-                                          Toast.makeText(getContext(), "درخواست شما ثبت شد ، با شما تماس خواهیم گرفت ", Toast.LENGTH_LONG).show();
-                                          progressBar_courseList.setVisibility(View.GONE);
-                                          btn_sendReq.setEnabled(true);
+                alert_builder.setTitle("لیست دروس انتخاب شده : ");
+                alert_builder.setMessage(selectedCourses.toString() );
+                alert_builder.setPositiveButton("تایید", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        String Temp="";
+                        btn_sendReq.setEnabled(false);
+                        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                        JSONObject courses = new JSONObject();
+                        try {
+                            for (int i =0;i < selectedCourses.size();i++){
+                                Temp += selectedCourses.get(i)+":";
+                            }
+                            // Toast.makeText(getContext(), Temp, Toast.LENGTH_SHORT).show();
+                            courses.put("courseslist",Temp);
+                            courses.put("studentID",sharedPreferences.getString("userID",""));
 
-                                   
-                                } catch (JSONException e1) {
-                                    e1.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // String json = new Gson().toJson(selectedCourses);
+                        //sending request to server
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "http://api.mim-app.ir/InsertValue_courseListRequest_kntuShahed.php", courses,
+                                new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+
+                                        try {
+                                            JSONArray array = response.getJSONArray("courseBulkReserve");
+
+                                            JSONObject jsontemp = array.getJSONObject(0);
+                                            Log.i("log"," Bulk reserveanswer : "+ jsontemp.getString("flag"));
+
+                                           // Toast.makeText(getContext(), "درخواست شما ثبت شد ، با شما تماس خواهیم گرفت ", Toast.LENGTH_LONG).show();
+                                            AlertDialog.Builder alert_builder = new AlertDialog.Builder(getContext());
+                                            alert_builder.setIcon(R.drawable.ic_notifications_black_24dp);
+
+                                            alert_builder.setTitle("اطلاعیه: ");
+                                            alert_builder.setMessage("درخواست شما ثبت شد ، با شما تماس خواهیم گرفت " );
+                                            alert_builder.setNeutralButton("تایید" , null);
+                                            alert_builder.show();
+                                            progressBar_courseList.setVisibility(View.GONE);
+                                            btn_sendReq.setEnabled(true);
+
+
+                                        } catch (JSONException e1) {
+                                            e1.printStackTrace();
+                                        }
+
+
+
+
+
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(getContext(), "ثبت درخواست با مشکل مواجه شد ، بعدا دوباره تلاش کنید", Toast.LENGTH_SHORT).show();
+                                        progressBar_courseList.setVisibility(View.GONE);
+                                    }
                                 }
 
 
+                        );
+                        myrequestqueue.add(jsonObjectRequest);
 
 
 
+
+
+
+
+
+                    }
+                })
+                        .setNegativeButton("رد", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
                             }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getContext(), "ثبت درخواست با مشکل مواجه شد ، بعدا دوباره تلاش کنید", Toast.LENGTH_SHORT).show();
-                                progressBar_courseList.setVisibility(View.GONE);
-                            }
-                        }
+                        });
+                alert_builder.show();
 
 
-                );
-                myrequestqueue.add(jsonObjectRequest);
 
             }
         });

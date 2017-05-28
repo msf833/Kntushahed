@@ -29,6 +29,7 @@ public class courseAdapter extends ArrayAdapter {
     ArrayList<course> list = new ArrayList();
     ArrayList<course> filerlist = new ArrayList();
     customFilter filter;
+
     public courseAdapter( Context context, int resource) {
         super(context, resource);
     }
@@ -48,18 +49,23 @@ public class courseAdapter extends ArrayAdapter {
     public course getItem(int position) {
         return  list.get(position);
     }
+    public course getItemFilter(int position) {
+        return  filerlist.get(position);
+    }
+
 
     @NonNull
     public View getView(int position, View convertView, ViewGroup parent) {
         View row ;
         row = convertView;
-     ;
+
         if (row == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.row_course, parent,false);
         }
 
         course crs = getItem(position);
+
 
         TextView tv_crsfName = (TextView) row.findViewById(R.id.tv_courseName);
         tv_crsfName.setText(crs.getCourseName());
@@ -75,13 +81,15 @@ public class courseAdapter extends ArrayAdapter {
             ImageView IV_goodtpic = (ImageView) row.findViewById(R.id.iv_row_course);
             Picasso.with(getContext()).load(imageurl).into(IV_goodtpic);
         }
-            if (crs.isSelected()){
+        if (crs.isSelected()){
                 relativeLayout.setBackgroundColor(Color.parseColor("#FFFFECB8"));
              //  this.notifyDataSetChanged();
-            }else{
+        }else{
                 relativeLayout.setBackgroundColor(Color.WHITE);
                 //this.notifyDataSetChanged();
-            }
+        }
+
+
         return row;
     }
 
@@ -100,7 +108,7 @@ public class courseAdapter extends ArrayAdapter {
        protected FilterResults performFiltering(CharSequence constraint) {
 
            FilterResults results = new FilterResults();
-           ArrayList<course> filters = new ArrayList<>();
+           ArrayList<course>  filters = new ArrayList<>();
 
 
            if ( constraint != null && constraint.length() > 0 ){
@@ -110,6 +118,7 @@ public class courseAdapter extends ArrayAdapter {
                for (int i =0 ; i<filerlist.size();i++){
                    if (filerlist.get(i).getCourseName().toUpperCase().contains(constraint)){
                        course c = new course(filerlist.get(i).getCourseID(),filerlist.get(i).getCourseName(),filerlist.get(i).getCourseImageUrl());
+
                        filters.add(c);
                    }
                }
