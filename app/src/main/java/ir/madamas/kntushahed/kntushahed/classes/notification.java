@@ -8,11 +8,13 @@ public class notification {
     String maincontent;
     String title;
     String timedate;
+    String status;
 
-    public notification(String maincontent, String title, String timedate) {
+    public notification(String maincontent, String title, String timedate, String status) {
         this.maincontent = maincontent;
         this.title = title;
         this.timedate = timedate;
+        this.status = status;
     }
 
     @Override
@@ -20,6 +22,7 @@ public class notification {
         return "notification{" +
                 "maincontent='" + maincontent + '\'' +
                 ", title='" + title + '\'' +
+                ", status='" + status + '\'' +
                 ", timedate='" + timedate + '\'' +
                 '}';
     }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import ir.madamas.kntushahed.kntushahed.*;
 import java.util.ArrayList;
@@ -62,6 +63,14 @@ public class notificationAdapter extends ArrayAdapter {
         tv_maincontent.setEnabled(false);
         TextView tv_datetime = (TextView) row.findViewById(R.id.tv_datetime);
         tv_datetime.setText(noti.getTimedate());
+        TextView tv_status = (TextView) row.findViewById(R.id.tv_status);
+        tv_status.setText(noti.status);
+        ImageView notiImage = (ImageView) row.findViewById(R.id.notification_seen_icon);
+        if (noti.status.equals("(در حال بررسی)")){
+            notiImage.setImageResource(R.drawable.ic_notifications_black_24dp);
+        }else {
+            notiImage.setImageResource(R.drawable.ic_notifications_black_24dp_seen);
+        }
         return row;
     }
 }

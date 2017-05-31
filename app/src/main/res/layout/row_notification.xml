@@ -7,7 +7,7 @@
     android:textDirection="rtl">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/notification_seen_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -34,7 +34,7 @@
         android:layout_alignEnd="@+id/tv_notititle"
         android:layout_below="@+id/tv_notititle"
         android:layout_marginTop="13dp"
-        android:layout_toEndOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/notification_seen_icon"
         android:editable="false"
         android:ems="10"
         android:enabled="true"
@@ -51,4 +51,16 @@
         android:layout_toStartOf="@+id/tv_notititle"
         android:text="زمان"
         android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#9f0b3f"
+        android:textSize="18sp"
+        android:layout_marginEnd="10dp"
+        android:layout_alignBaseline="@+id/tv_notititle"
+        android:layout_alignBottom="@+id/tv_notititle"
+        android:layout_toStartOf="@+id/tv_notititle" />
 </RelativeLayout>

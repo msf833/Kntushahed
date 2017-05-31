@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.GridLayoutAnimationController;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -43,6 +44,8 @@ public class notificationFragment extends Fragment {
     ListView listView;
     ProgressBar notification_progressBar;
     notificationAdapter nadapter;
+    ImageView notification_seen;
+
     public notificationFragment() {
         // Required empty public constructor
     }
@@ -53,7 +56,7 @@ public class notificationFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View notificationFragmentView =  inflater.inflate(R.layout.fragment_notification, container, false);
-
+        notification_seen = (ImageView) notificationFragmentView.findViewById(R.id.notification_seen_icon);
         // Inflate the layout for this fragment
         return notificationFragmentView;
     }
@@ -85,7 +88,7 @@ public class notificationFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        String maincontent , title , timedate;
+                        String maincontent , title , timedate, m, seeStatus, statusResp;
                         try {
                             JSONArray array = response.getJSONArray("eventList");
 
@@ -94,10 +97,18 @@ public class notificationFragment extends Fragment {
                                 JSONObject jsontemp = array.getJSONObject(i);
                                // Log.i("log"," courseName : "+jsontemp.getString("courseName") +"courseID "+jsontemp.getString("courseID"));
                                 maincontent = jsontemp.getString("mainContent");
+                                m = maincontent.substring(0, maincontent.length()-1);
+                                m = m.replaceAll(":", " - ");
                                 title =  jsontemp.getString("title");
                                 timedate =jsontemp.getString("dateTime");
-                                Log.i("notifrag","main : "+maincontent + "title : "+title + "timedate : "+timedate);
-                                ir.madamas.kntushahed.kntushahed.classes.notification notif= new notification(maincontent,title,timedate);
+                                seeStatus = jsontemp.getString("seeStatus");
+                                if (seeStatus.equals("0")){
+                                    statusResp = "(در حال بررسی)";
+                                }else {
+                                    statusResp = "";
+                                }
+                                Log.i("notifrag","main : "+ m + "title : "+title + "timedate : "+timedate);
+                                ir.madamas.kntushahed.kntushahed.classes.notification notif= new notification(m,title,timedate, statusResp);
                                 nadapter.add(notif);
 
                             }
