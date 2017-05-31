@@ -89,6 +89,7 @@ public class coursesListFragment extends Fragment {
         selectedCourses = new ArrayList<>();
         cadapter = new courseAdapter(getContext(),R.layout.row_course);
         searchView = (SearchView) getView().findViewById(R.id.searchView);
+        searchView.setQueryHint("جستجو...");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

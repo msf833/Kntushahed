@@ -238,10 +238,7 @@ public class SignupLoginActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "userID: " + userID, Toast.LENGTH_SHORT).show();
 
                             if (flag.toString().startsWith("d")){
-                                flagTemp = true;
-                            }
 
-                            if(flagTemp){
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putBoolean("Registered", true);
                                 editor.putString("Username", u);
@@ -254,10 +251,10 @@ public class SignupLoginActivity extends AppCompatActivity {
                                 Intent item_intent = new Intent(getApplicationContext(), splash.class);
                                 startActivity(item_intent);
                                 finish();
+
                             }else {
                                 Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
                             }
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -300,22 +297,18 @@ public class SignupLoginActivity extends AppCompatActivity {
                         String f = "";
                         String s = "";
                         try {
-
                             JSONArray array = response.getJSONArray("search_resualt");
-
                             JSONObject jsontemp = array.getJSONObject(0);
 
                             flag = jsontemp.getString("flag");
-                            userID = jsontemp.getString("studentID");
-                            n = jsontemp.getString("name");
-                            f = jsontemp.getString("family");
-                            s = jsontemp.getString("stdID");
 
                             if (flag.toString().startsWith("d")){
-                                flagTemp = true;
-                            }
 
-                            if(flagTemp){
+                                userID = jsontemp.getString("studentID");
+                                n = jsontemp.getString("name");
+                                f = jsontemp.getString("family");
+                                s = jsontemp.getString("stdID");
+
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putBoolean("Registered", true);
                                 editor.putString("Username", u);
@@ -328,8 +321,10 @@ public class SignupLoginActivity extends AppCompatActivity {
                                 Intent item_intent = new Intent(getApplicationContext(), splash.class);
                                 startActivity(item_intent);
                                 finish();
+
                             }else {
                                 Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
+                                ProgressView.setVisibility(View.GONE);
                             }
 
 

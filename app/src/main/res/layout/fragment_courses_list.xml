@@ -15,11 +15,12 @@
 
         <SearchView
             android:id="@+id/searchView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView4"
             android:layout_toEndOf="@+id/listView_fragment_courseList"
             android:visibility="gone"
+            android:background="@color/searchBtn"
             app:defaultQueryHint="جستجو.."
             app:queryHint="جستجو.." />
 

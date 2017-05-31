@@ -3,6 +3,7 @@
     <color name="colorPrimary">#10ba81</color>
     <color name="colorPrimaryDark">#10ba81</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="searchBtn">#b3e1de</color>
     <color name="notiImage_seen">#90000000</color>
     <color name="notiImage_not_seen">#dc1a5e</color>
     <color name="black_overlay">#66000000</color>
