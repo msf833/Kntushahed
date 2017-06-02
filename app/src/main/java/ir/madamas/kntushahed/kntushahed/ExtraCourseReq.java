@@ -54,6 +54,7 @@ Button  btn_extracourseActivity ;
                     // Toast.makeText(getContext(), Temp, Toast.LENGTH_SHORT).show();
                     courses.put("courseslist",editText_extra.getText().toString());
                     courses.put("studentID",sharedPreferences.getString("userID",""));
+                    courses.put("rFlag", "1");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -71,7 +72,7 @@ Button  btn_extracourseActivity ;
                                     JSONObject jsontemp = array.getJSONObject(0);
                                     Log.i("log"," Bulk reserveanswer : "+ jsontemp.getString("flag"));
 
-                                    Toast.makeText(getApplicationContext(), "درخواست شما ثبت شد ، با شما تماس خواهیم گرفت ", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "درخواست شما ثبت شد", Toast.LENGTH_LONG).show();
                                     progressBar_ExtraCourse.setVisibility(View.GONE);
                                     btn_extracourseActivity.setEnabled(true);
 

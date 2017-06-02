@@ -191,6 +191,7 @@ public class coursesListFragment extends Fragment {
                             // Toast.makeText(getContext(), Temp, Toast.LENGTH_SHORT).show();
                             courses.put("courseslist",Temp);
                             courses.put("studentID",sharedPreferences.getString("userID",""));
+                            courses.put("rFlag", "0");
 
                         } catch (JSONException e) {
                             e.printStackTrace();
