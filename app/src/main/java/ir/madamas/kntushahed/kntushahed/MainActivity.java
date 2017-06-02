@@ -190,7 +190,6 @@ public class MainActivity extends AppCompatActivity {
 
         }else {
             eCounter ++;
-            Toast.makeText(getApplicationContext(), "برای خارج شدن از برنامه مجددا کلیک کنید", Toast.LENGTH_SHORT).show();
         }
 
     }
