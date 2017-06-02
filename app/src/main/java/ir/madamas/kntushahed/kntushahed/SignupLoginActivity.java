@@ -257,7 +257,7 @@ public class SignupLoginActivity extends AppCompatActivity {
                                 editor.apply();
                                 Intent item_intent = new Intent(getApplicationContext(), splash.class);
                                 startActivity(item_intent);
-                                signun_button.setEnabled(true);
+                                //signun_button.setEnabled(true);
                                 finish();
 
                             }else {
