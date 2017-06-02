@@ -77,6 +77,11 @@ public class SignupLoginActivity extends AppCompatActivity {
     private EditText stdID_signup;
     private ProgressBar ProgressView;
 
+
+    Button signun_button ;
+    Button login_button ;
+
+
     //exit counter
     int eCounter = 0;
 
@@ -107,8 +112,8 @@ public class SignupLoginActivity extends AppCompatActivity {
         family_signup = (EditText) findViewById(R.id.TBox_family_signup);
         stdID_signup = (EditText) findViewById(R.id.TBox_stdID_signup);
 
-        Button signun_button = (Button) findViewById(R.id.signun_button);
-        Button login_button = (Button) findViewById(R.id.login_button);
+         signun_button = (Button) findViewById(R.id.signun_button);
+        login_button = (Button) findViewById(R.id.login_button);
 
         //mLoginFormView = findViewById(R.id.login_form);
 
@@ -144,6 +149,7 @@ public class SignupLoginActivity extends AppCompatActivity {
                         isNameFamilyValid(Txt_family_signup) == true &&
                         isStdIDValid(Txt_stdID_signup) == true) {
 
+                    signun_button.setEnabled(false);
                         registerUser(Txt_username_signup, Txt_Password_signup, Txt_name_signup, Txt_family_signup, Txt_stdID_signup);
 
                 }
@@ -187,6 +193,7 @@ public class SignupLoginActivity extends AppCompatActivity {
                         isPasswordValid(Txt_Password_login) == true) {
 
                     loginUser(Txt_username_login, Txt_Password_login);
+
 
                 }
 
@@ -250,10 +257,12 @@ public class SignupLoginActivity extends AppCompatActivity {
                                 editor.apply();
                                 Intent item_intent = new Intent(getApplicationContext(), splash.class);
                                 startActivity(item_intent);
+                                signun_button.setEnabled(true);
                                 finish();
 
                             }else {
                                 Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
+                                signun_button.setEnabled(true);
                             }
 
                         } catch (JSONException e) {
@@ -266,7 +275,8 @@ public class SignupLoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
+                        signun_button.setEnabled(true);
                     }
                 }
 
@@ -338,7 +348,7 @@ public class SignupLoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
                     }
                 }
 
