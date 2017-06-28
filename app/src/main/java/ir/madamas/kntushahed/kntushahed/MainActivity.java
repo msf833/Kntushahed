@@ -1,6 +1,5 @@
 package ir.madamas.kntushahed.kntushahed;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -8,14 +7,16 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,29 +24,20 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import ir.madamas.kntushahed.kntushahed.Statics.attributes;
-import ir.madamas.kntushahed.kntushahed.fragments.RecylceBased_couseListFragment;
 import ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment;
 import ir.madamas.kntushahed.kntushahed.fragments.notificationFragment;
 
-import static java.security.AccessController.getContext;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView mTextMessage;
     int eCounter = 0;
     RequestQueue myrequestqueue;
     String tempMF;
     SharedPreferences sharedPreferences;
-
 
     FragmentManager fragmentManager ;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -75,7 +67,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.drawer_layout);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //done with making navigation drawer :)
+        /*--------------------------------------------------------------------------------------------------------------*/
+
         myrequestqueue = Volley.newRequestQueue(getApplicationContext());
          fragmentManager = getSupportFragmentManager();
         FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
@@ -151,12 +160,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
-
     void checkupdate(){
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-      final   String DownloadupdateLink = "http://api.mim-app.ir/kntuShahedApp/kntushahed.apk";
+        final   String DownloadupdateLink = "http://api.mim-app.ir/kntuShahedApp/kntushahed.apk";
         StringRequest sr = new StringRequest(Request.Method.POST, "http://api.mim-app.ir/app_update.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -185,6 +191,13 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
         if (eCounter == 1){
             this.finishAffinity();
 
@@ -194,4 +207,59 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //here is onItemClickOption for navigation menu :)
+    /*--------------------------------------------------------------------------------------------------------------*/
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.nav_profile) {
+
+            Intent intent = new Intent(getApplicationContext(), EditPersonalInfo.class);
+            startActivity(intent);
+            return true;
+
+        } else if (id == R.id.nav_newCourse) {
+
+            Intent intent = new Intent(getApplicationContext(), ExtraCourseReq.class);
+            startActivity(intent);
+            return true;
+
+        } else if (id == R.id.nav_booklet) {
+
+            Toast.makeText(getApplicationContext(), "Not working yet :)", Toast.LENGTH_SHORT).show();
+
+        } else if (id == R.id.nav_aboutUs) {
+
+            Intent intent = new Intent(getApplicationContext(), about.class);
+            startActivity(intent);
+            return true;
+
+        } else if (id == R.id.nav_share) {
+
+
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    String shareBody = "دانشجوی عزیز، با سلام\n" +
+                            "با توجه به نیاز دیده شده برای درخواست و هماهنگی کلاسهای تقویتی شاهد و ایثارگران برنامه اندرویدی زیر با حمایت استاد بطحایی نوشته و آماده استفاده می باشد.\n" +
+                            "http://madamas.ir/kntushahed.apk\n" +
+                            "دانشجویان شاهد از این پس میتوانند جهت درخواست کلاس از طریق این برنامه اقدام کنند.\n" +
+                            "درصورت هرگونه مشکل یا نیاز به راهنمایی با ایمیل \n" +
+                            "info@madamas.ir\n" +
+                            "در تماس باشید\n" +
+                            "با آرزوی موفقیت شما\n" +
+                            "طرح شاهد اوج _ دانشکده برق و کامپیوتر";
+                    String shareSub = "طرح شاهد اوج";
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                    startActivity(Intent.createChooser(sharingIntent, "Share using"));
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }

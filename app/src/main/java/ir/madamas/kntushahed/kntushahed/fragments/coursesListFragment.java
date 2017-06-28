@@ -3,7 +3,6 @@ package ir.madamas.kntushahed.kntushahed.fragments;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -16,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.GridLayoutAnimationController;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -33,17 +31,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 
-import ir.madamas.kntushahed.kntushahed.classes.courseAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import ir.madamas.kntushahed.kntushahed.classes.course;
 import ir.madamas.kntushahed.kntushahed.R;
+import ir.madamas.kntushahed.kntushahed.classes.course;
+import ir.madamas.kntushahed.kntushahed.classes.courseAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -111,7 +108,7 @@ public class coursesListFragment extends Fragment {
         gridView.setAnimation(anim_m_left);
         gridView.startAnimation(anim_m_right);
         GridLayoutAnimationController controller = new GridLayoutAnimationController(anim_m_right, .2f, .2f);
-       gridView.setLayoutAnimation(controller);
+        gridView.setLayoutAnimation(controller);
 //      gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
 //          @Override
 //          public void onScrollStateChanged(AbsListView view, int scrollState) {

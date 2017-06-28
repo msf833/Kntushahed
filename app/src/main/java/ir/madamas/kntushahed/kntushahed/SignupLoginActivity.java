@@ -1,41 +1,19 @@
 package ir.madamas.kntushahed.kntushahed;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -43,22 +21,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import ir.madamas.kntushahed.kntushahed.classes.course;
-
-import static android.Manifest.permission.READ_CONTACTS;
-import static android.accounts.AccountManager.KEY_PASSWORD;
 
 /**
  * A login screen that offers login via email/password.
@@ -150,7 +117,7 @@ public class SignupLoginActivity extends AppCompatActivity {
                         isStdIDValid(Txt_stdID_signup) == true) {
 
                     signun_button.setEnabled(false);
-                        registerUser(Txt_username_signup, Txt_Password_signup, Txt_name_signup, Txt_family_signup, Txt_stdID_signup);
+                    registerUser(Txt_username_signup, Txt_Password_signup, Txt_name_signup, Txt_family_signup, Txt_stdID_signup);
 
                 }
 
@@ -241,9 +208,11 @@ public class SignupLoginActivity extends AppCompatActivity {
                             JSONObject jsontemp = array.getJSONObject(0);
 
                             flag = jsontemp.getString("flag");
+                            Log.i("bib", flag);
                             userID = jsontemp.getString("studentID");
-                            Toast.makeText(getApplicationContext(), "userID: " + userID, Toast.LENGTH_SHORT).show();
-
+                            Log.i("bib 1", userID);
+                            //Toast.makeText(getApplicationContext(), "userID: " + userID, Toast.LENGTH_SHORT).show();
+                            Log.i("bib 2", "dare mishe");
                             if (flag.toString().startsWith("d")){
 
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -255,10 +224,12 @@ public class SignupLoginActivity extends AppCompatActivity {
                                 editor.putString("stdID", s);
                                 editor.putString("userID", userID);
                                 editor.apply();
-                                Intent item_intent = new Intent(getApplicationContext(), splash.class);
-                                startActivity(item_intent);
+                                Toast.makeText(SignupLoginActivity.this, "shod", Toast.LENGTH_SHORT).show();
+                                SignupLoginActivity.this.finish();
+                                //Intent item_intent = new Intent(getApplicationContext(), splash.class);
+                                //startActivity(item_intent);
                                 //signun_button.setEnabled(true);
-                                finish();
+
 
                             }else {
                                 Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
