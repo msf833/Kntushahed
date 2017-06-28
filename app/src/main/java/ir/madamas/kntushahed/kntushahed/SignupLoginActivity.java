@@ -209,11 +209,13 @@ public class SignupLoginActivity extends AppCompatActivity {
 
                             flag = jsontemp.getString("flag");
                             Log.i("bib", flag);
-                            userID = jsontemp.getString("studentID");
-                            Log.i("bib 1", userID);
+
                             //Toast.makeText(getApplicationContext(), "userID: " + userID, Toast.LENGTH_SHORT).show();
                             Log.i("bib 2", "dare mishe");
                             if (flag.toString().startsWith("d")){
+
+                                userID = jsontemp.getString("studentID");
+                                Log.i("bib 1", userID);
 
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putBoolean("Registered", true);
@@ -224,15 +226,15 @@ public class SignupLoginActivity extends AppCompatActivity {
                                 editor.putString("stdID", s);
                                 editor.putString("userID", userID);
                                 editor.apply();
-                                Toast.makeText(SignupLoginActivity.this, "shod", Toast.LENGTH_SHORT).show();
                                 SignupLoginActivity.this.finish();
                                 //Intent item_intent = new Intent(getApplicationContext(), splash.class);
                                 //startActivity(item_intent);
                                 //signun_button.setEnabled(true);
 
 
-                            }else {
-                                Toast.makeText(getApplicationContext(), "something went wrong :(", Toast.LENGTH_SHORT).show();
+                            }else if (flag.toString().startsWith("c")){
+                                Toast.makeText(getApplicationContext(), "این شماره قبلا ثبت شده است", Toast.LENGTH_SHORT).show();
+                                ProgressView.setVisibility(View.GONE);
                                 signun_button.setEnabled(true);
                             }
 
