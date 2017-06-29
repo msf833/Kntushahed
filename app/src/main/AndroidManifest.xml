@@ -19,8 +19,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +36,9 @@
             android:label="@string/title_activity_extra_course_req"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".about" />
-        <activity android:name=".splash"></activity>
+        <activity android:name=".splash" />
+        <activity android:name=".bookletActivity" />
+        <activity android:name=".bookletDetailActivity"></activity>
     </application>
 
 </manifest>

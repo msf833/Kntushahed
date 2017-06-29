@@ -228,8 +228,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
 
         } else if (id == R.id.nav_booklet) {
+// ---------- To send sms to a phone number using user device :)
+//            SmsManager smsManager = SmsManager.getDefault();
+//            smsManager.sendTextMessage("+980000000", null, "sms msg", null, null);
+            //Toast.makeText(getApplicationContext(), "Not working yet :)", Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(getApplicationContext(), "Not working yet :)", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), bookletActivity.class);
+            startActivity(intent);
+            return true;
 
         } else if (id == R.id.nav_aboutUs) {
 

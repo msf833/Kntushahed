@@ -38,4 +38,13 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="avali" >same shit </string>
+    <string name="dovomi" >same shit </string>
+    <string name="sevomi" >same shit </string>
+    <string name="chaharomi" >same shit </string>
+    <string name="panjomi" >same shit </string>
+    <string name="shishomi" >same shit </string>
+    <string name="haftomi" >same shit </string>
+
 </resources>
