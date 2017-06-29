@@ -3,6 +3,7 @@ package ir.madamas.kntushahed.kntushahed;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -64,13 +65,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_layout);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar toolbar;
+
+        if(Build.VERSION.SDK_INT > 19) {
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+        }else {
+            toolbar = (Toolbar) findViewById(R.id.toolbar1);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -82,11 +92,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         //done with making navigation drawer :)
         /*--------------------------------------------------------------------------------------------------------------*/
 
         myrequestqueue = Volley.newRequestQueue(getApplicationContext());
-         fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         FragmentTransaction frm = fragmentManager.beginTransaction().replace(R.id.content,new coursesListFragment());
         frm.commit();
         Thread th = new Thread(new Runnable() {

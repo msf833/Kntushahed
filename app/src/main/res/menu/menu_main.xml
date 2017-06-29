@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ndroid="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
     <item
         android:id="@+id/add"
         android:icon="@android:drawable/ic_menu_myplaces"

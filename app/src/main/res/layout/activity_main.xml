@@ -9,6 +9,13 @@
     android:orientation="vertical"
     tools:context="ir.madamas.kntushahed.kntushahed.MainActivity">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize" />
+
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
