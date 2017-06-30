@@ -13,25 +13,30 @@
     android:orientation="vertical"
     android:gravity="bottom">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imageView"
+        android:paddingTop="10dp"
+        android:layout_gravity="left"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:src="@drawable/user_profile_default_pic"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>
+
+    <!--<ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@mipmap/ic_logo" />
+        app:srcCompat="@mipmap/ic_logo" />-->
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="left"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="کاربر عزیز"
+        android:text="کاربر عزیز وقت بخیر"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="وقت بخیر"
-        android:id="@+id/textView" />
 
 </LinearLayout>

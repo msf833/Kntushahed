@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -75,12 +74,12 @@ public class bookletActivity extends AppCompatActivity {
                             JSONObject jsontemp = array.getJSONObject(0);
 
                             flag = jsontemp.getString("flag");
-                            Log.i("boob", flag);
+                            //Log.i("boob", flag);
 
                             //Toast.makeText(getApplicationContext(), "userID: " + userID, Toast.LENGTH_SHORT).show();
-                            Log.i("boob 2", "dare mishe");
+                            //Log.i("boob 2", "dare mishe");
                             if (flag.toString().startsWith("t")){
-                                Log.i("boob 3", "shod");
+                                //Log.i("boob 3", "shod");
 
                                 for (int i = 0;i<array.length();i++){
 
@@ -95,7 +94,7 @@ public class bookletActivity extends AppCompatActivity {
                                     rate = jsontemp.getString("rate");
                                     price = jsontemp.getString("price");
 
-                                    Log.i("boob 4", ID + " " + name);
+                                    //Log.i("boob 4", ID + " " + name);
 
                                     Booklet booklet= new Booklet(ID,name,level,user_ID,link,size,rate,price);
                                     bookletList.add(booklet);
