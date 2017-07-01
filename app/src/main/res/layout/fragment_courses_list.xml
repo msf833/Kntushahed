@@ -24,6 +24,7 @@
             app:defaultQueryHint="جستجو.."
             app:queryHint="جستجو.." />
 
+
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
