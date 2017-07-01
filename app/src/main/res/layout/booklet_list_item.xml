@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:numStars="5"
         android:rating="2.5"
-        android:stepSize="0.5"
+        android:stepSize="0.1"
         android:layout_below="@+id/textView_bookletItem"
         android:layout_toStartOf="@+id/ratingBarText_bookletItem" />
 
