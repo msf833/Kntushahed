@@ -3,12 +3,11 @@ package ir.madamas.kntushahed.kntushahed;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -25,6 +24,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Locale;
+
 public class ExtraCourseReq extends AppCompatActivity {
 Button  btn_extracourseActivity ;
     SharedPreferences sharedPreferences;
@@ -40,6 +41,14 @@ Button  btn_extracourseActivity ;
         setSupportActionBar(toolbar);
         progressBar_ExtraCourse = (ProgressBar) findViewById(R.id.progressBar_ExtraCourse);
         btn_extracourseActivity = (Button) findViewById(R.id.btn_extracourseActivity);
+
+        WebView textView = (WebView) findViewById(R.id.textView);
+        String text="در صورتی که درسی رو میخوای و توی لیست درسا نبود اینجا اسمشو بنویس و درخواست رو بزن";
+
+        String justifyTag = "<html><body style='direction:rtl;text-size:40px;padding:10px;text-align:justify;'>%s</body></html>";
+        String dataString = String.format(Locale.US, justifyTag, text);
+        textView.loadDataWithBaseURL("", dataString, "text/html", "UTF-8", "");
+
         editText_extra= (EditText) findViewById(R.id.editText_extra);
         myrequestqueue = Volley.newRequestQueue(getApplicationContext());
         btn_extracourseActivity.setOnClickListener(new View.OnClickListener() {

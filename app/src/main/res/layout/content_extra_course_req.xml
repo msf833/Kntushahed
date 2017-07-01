@@ -19,24 +19,30 @@
         android:layout_marginTop="13dp"
         android:visibility="gone" />
 
-    <TextView
+
+    <WebView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!--<TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="در صورتی که درسی رو میخوای و توی لیست درسا نبود اینجا اسمشو بنویس و درخواست رو بزن"
-        android:textSize="18sp" />
+        android:textSize="18sp" />-->
 
     <EditText
         android:id="@+id/editText_extra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_below="@+id/textView"
         android:layout_weight="1"
         android:ems="10"
         android:hint="اسم درس "
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/btn_extracourseActivity"
