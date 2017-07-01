@@ -17,17 +17,31 @@
             android:layout_below="@+id/iv_row_course"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"
+            android:layout_marginBottom="15dp"
             android:text="TextView"
             android:textAlignment="center" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_row_course"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_logo"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#fff"
+            android:layout_below="@+id/tv_coureID"
+            android:layout_alignStart="@+id/tv_courseName"
+            android:layout_marginTop="18dp" />
+
+
+        <!--<ImageView
             android:id="@+id/iv_row_course"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="17dp"
-            app:srcCompat="@mipmap/ic_logo" />
+            app:srcCompat="@mipmap/ic_logo" />-->
 
         <TextView
             android:id="@+id/tv_coureID"

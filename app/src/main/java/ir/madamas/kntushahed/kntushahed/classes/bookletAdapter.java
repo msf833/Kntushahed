@@ -1,6 +1,7 @@
 package ir.madamas.kntushahed.kntushahed.classes;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,8 +65,23 @@ public class bookletAdapter extends BaseAdapter {
             TextView textView_bookletID = (TextView) row.findViewById(R.id.textView_bookletID);
             textView_bookletID.setText(booklet.ID);
 
-            RatingBar ratingBar_bookletItem = (RatingBar) row.findViewById(R.id.ratingBar_bookletItem);
-            ratingBar_bookletItem.setRating(Float.parseFloat(booklet.rate));
+            TextView parantez = (TextView) row.findViewById(R.id.parantez);
+            parantez.setVisibility(View.GONE);
+
+            if(Build.VERSION.SDK_INT > 19) {
+                RatingBar ratingBar_bookletItem = (RatingBar) row.findViewById(R.id.ratingBar_bookletItem);
+                ratingBar_bookletItem.setRating(Float.parseFloat(booklet.rate));
+            }else {
+                RatingBar ratingBar_bookletItem = (RatingBar) row.findViewById(R.id.ratingBar_bookletItem);
+                ratingBar_bookletItem.setNumStars(1);
+                parantez.setVisibility(View.VISIBLE);
+                TextView ratingBarText_bookletItem = (TextView) row.findViewById(R.id.ratingBarText_bookletItem);
+                ratingBarText_bookletItem.setText(booklet.rate+")");
+            }
+
+
+
+
 
             row.setTag(R.string.avali, booklet.ID.toString());
             row.setTag(R.string.dovomi, booklet.name.toString());
