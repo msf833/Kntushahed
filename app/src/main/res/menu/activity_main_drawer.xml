@@ -20,12 +20,17 @@
             android:title="درباره ما" />
     </group>
 
-    <item android:title="به اشتراک گذاری برنامه">
+    <item android:title="بیشتر">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="برنامه را با دوستانتان به اشتراک بگذارید" />
+
+            <item
+                android:id="@+id/nav_update"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="به روز رسانی برنامه" />
         </menu>
     </item>
 

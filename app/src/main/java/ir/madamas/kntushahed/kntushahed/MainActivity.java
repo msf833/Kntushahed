@@ -272,7 +272,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                     startActivity(Intent.createChooser(sharingIntent, "Share using"));
 
-        }
+        } else if (id == R.id.nav_update) {
+
+            //-------------------------------------------------
+            //here is a code to make local notification :)
+            /*
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivities(getApplicationContext(), 1, new Intent[]{intent}, 0);
+            Notification notification = new Notification.Builder(getApplicationContext())
+                    .setContentTitle("بررسی برای به روز رسانی..")
+                    .setContentText("شما از آخرین نسخه برنامه استفاده می کنید :)")
+                    .setContentIntent(pendingIntent)
+                    .addAction(android.R.drawable.arrow_down_float, "صفحه اصلی برنامه", pendingIntent)
+                    .setSmallIcon(android.R.drawable.stat_sys_warning)
+                    .build();
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.notify(1, notification);
+            */
+        return true;
+
+    }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
