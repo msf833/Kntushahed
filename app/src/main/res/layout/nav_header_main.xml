@@ -26,23 +26,51 @@
             android:layout_gravity="left"
             android:paddingTop="10dp"
             android:src="@drawable/user_profile_default_pic"
-            app:civ_border_color="#FF000000"
+            app:civ_border_color="#d6d6d6"
             app:civ_border_width="2dp" />
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/imageView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
-            app:srcCompat="@mipmap/ic_logo"/>
+            app:srcCompat="@mipmap/ic_logo"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:paddingTop="30dp"
-            android:text="کاربر عزیز وقت بخیر"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:id="@+id/usernameNavbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layoutDirection="rtl"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:text="علی عزیز وقت بخیر"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/userIDNavBar"
+                android:layoutDirection="rtl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:text="930253508"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_below="@+id/usernameNavbar"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/usernameNavbar" />
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 
