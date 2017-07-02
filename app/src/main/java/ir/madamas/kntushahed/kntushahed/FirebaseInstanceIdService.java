@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -24,14 +23,14 @@ public class FirebaseInstanceIdService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
+        //Log.d(TAG, "From: " + remoteMessage.getFrom());
 
         if (remoteMessage.getData().size() > 0){
-            Log.d(TAG, "Data: " + remoteMessage.getData());
+            //Log.d(TAG, "Data: " + remoteMessage.getData());
         }
 
         if (remoteMessage.getNotification() != null){
-            Log.d(TAG, "Message body: " + remoteMessage.getNotification().getBody());
+            //Log.d(TAG, "Message body: " + remoteMessage.getNotification().getBody());
             sendNotofication(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification());
         }
     }
