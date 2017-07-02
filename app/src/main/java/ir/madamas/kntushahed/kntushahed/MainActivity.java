@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RequestQueue myrequestqueue;
     String tempMF;
     SharedPreferences sharedPreferences;
+    //amato dus daram
 
     FragmentManager fragmentManager ;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
