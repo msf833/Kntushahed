@@ -32,6 +32,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import ir.madamas.kntushahed.kntushahed.Statics.attributes;
 import ir.madamas.kntushahed.kntushahed.fragments.coursesListFragment;
 import ir.madamas.kntushahed.kntushahed.fragments.notificationFragment;
+import ir.madamas.kntushahed.kntushahed.introActivities.IntroActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -75,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         String token = FirebaseInstanceId.getInstance().getToken();
         //Log.i("this is the token: ", token);
+
+
+
+
 
         Toolbar toolbar;
 
@@ -127,8 +132,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         boolean Registered = sharedPreferences.getBoolean("Registered", false);
         if (Registered == false){
-            Intent item_intent = new Intent(getApplicationContext(), SignupLoginActivity.class);
-            startActivity(item_intent);
+
+            // aval mire tooye intro bad mire az oonja too safhe sabte nam
+            Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
+            startActivity(intent);
+
         }
 
         if (flag) {
