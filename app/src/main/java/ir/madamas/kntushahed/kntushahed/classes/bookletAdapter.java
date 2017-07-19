@@ -70,6 +70,8 @@ public class bookletAdapter extends BaseAdapter {
 
             if(Build.VERSION.SDK_INT > 19) {
                 RatingBar ratingBar_bookletItem = (RatingBar) row.findViewById(R.id.ratingBar_bookletItem);
+                TextView ratingBarText_bookletItem = (TextView) row.findViewById(R.id.ratingBarText_bookletItem);
+                ratingBarText_bookletItem.setVisibility(View.INVISIBLE);
                 ratingBar_bookletItem.setRating(Float.parseFloat(booklet.rate));
             }else {
                 RatingBar ratingBar_bookletItem = (RatingBar) row.findViewById(R.id.ratingBar_bookletItem);
