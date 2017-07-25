@@ -50,7 +50,7 @@
                 android:layoutDirection="rtl"
                 android:paddingLeft="20dp"
                 android:paddingTop="20dp"
-                android:text="علی عزیز وقت بخیر"
+                android:text=" عزیز وقت بخیر"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />

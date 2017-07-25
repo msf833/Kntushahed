@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -72,6 +73,24 @@ public class coursesListFragment extends Fragment {
         progressBar_courseList = (ProgressBar) view.getRootView().findViewById(R.id.progressBar_courseList);
         return view;
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+
+        String name = sharedPreferences.getString("name", "کاربر");
+        TextView navUserName = (TextView) header.findViewById(R.id.usernameNavbar);
+        name += " عزیز وقت بخیر";
+        navUserName.setText(name);
+
+        TextView userIDNavBar = (TextView) header.findViewById(R.id.userIDNavBar);
+        userIDNavBar.setText(sharedPreferences.getString("stdID", ""));
     }
 
     @Override
@@ -161,7 +180,13 @@ public class coursesListFragment extends Fragment {
                 Log.i("log",selectedCourses.toString());
             }
         });
-        
+
+
+//        NavigationView navigationView = (NavigationView) getView().findViewById(R.id.nav_view);
+//        View hView =  navigationView.getHeaderView(0);
+
+
+
         btn_sendReq = (Button) getView().findViewById(R.id.btn_getData);
         btn_sendReq.setOnClickListener(new View.OnClickListener() {
             @Override
