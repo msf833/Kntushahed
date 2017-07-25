@@ -83,6 +83,7 @@ public class coursesListFragment extends Fragment {
         NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
         View header=navigationView.getHeaderView(0);
+        //
 
         String name = sharedPreferences.getString("name", "کاربر");
         TextView navUserName = (TextView) header.findViewById(R.id.usernameNavbar);
